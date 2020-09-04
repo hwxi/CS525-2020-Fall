@@ -1,0 +1,21 @@
+================================================
+What is functional programming?
+================================================
+In pure functional programming, there are no updates!!!
+It is not like imperative programming, where memory updates
+are ubiquitous.
+================================================
+Let us do a few examples of functional programming.
+//
+(*
+factorial(0) = 1
+factorial(n) = n * factorial(n-1) if n > 0
+*)
+//
+// A program in ATS:
+//
+fun
+factorial(n) = // [n] is a name!!!
+if n = 0 then 1 else n * factorial(n-1)
+//
+================================================

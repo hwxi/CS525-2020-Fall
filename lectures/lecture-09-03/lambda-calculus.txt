@@ -1,0 +1,33 @@
+================================================
+Topic: Lambda-Calulus
+Another name: Calculus of Substitution
+Inventor: Prof. Alonzo Church
+Invented around 1930's
+Purpose of invention:
+Definition for computability
+Setting up a foundation for Mathematics
+
+Church's thesis:
+Every computable function can be encoded in
+the lambda-calculus
+================================================
+What is Lambda-Calculus?
+
+Let us use t for terms in lambda-calculus.
+
+Variables: x, y, z, ...
+
+Abstractions: \lam x. t (sometimes, \lam x => t)
+x: argument
+t: body of the abstraction
+
+Applications: t1(t2)
+t1: function part of the application
+t2: argument part of the application
+================================================
+Turing machines invented by Alan Turing
+
+Church-Turing's thesis:
+Every computable function can be encoded as
+a Turing machine
+================================================
