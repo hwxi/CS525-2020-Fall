@@ -6,11 +6,19 @@ frequently.
 
 Step 1:
 
+Please clone the class repository:
+
 ```
 git clone https://github.com/hwxi/CS525-2020-Fall
 ```
 
 Step 2:
+
+Please create a repository of your own:
+
+https://github.com/hwxi/CS525-2020-Fall-hwxi
+
+Then please mirror-push the class repo into your own repo:
 
 ```
 cd CS525-2020-Fall
@@ -21,7 +29,7 @@ git remote add upstream https://hwxi@github.com/hwxi/CS525-2020-FALL.git
 
 Step 3:
 
-Please update frequently:
+Please remember to sync with the class repo frequently:
 
 ```
 git fetch upstream
