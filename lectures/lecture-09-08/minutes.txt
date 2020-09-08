@@ -1,0 +1,14 @@
+
+Here is the link to the class repo:
+
+https://hwxi@github.com/hwxi/CS525-2020-Fall.git
+
+Please create a MIRROR of this repo and make it PRIVATE
+
+Let us talk about some basic functional programming
+
+We will be taking a build-your-own-library approach!!!
+
+1. Tail-recursion // see tailrec.dats
+2. Datatype and pattern matching // see datatype.dats
+
