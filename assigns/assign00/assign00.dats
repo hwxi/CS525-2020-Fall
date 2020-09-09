@@ -32,9 +32,10 @@ extern fun int_test(): int
 //
 fun ghaap(n: int): int =
 (
-  if n >= 2
-    then n * ghaap(n-1) * ghaap(n-2)
-    else (n+1)
+  if
+  (n >= 2)
+  then n * ghaap(n-1) * ghaap(n-2)
+  else (n+1)
   // end of [if]
 )
 //
