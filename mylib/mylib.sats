@@ -1,5 +1,7 @@
 (* ****** ****** *)
-
+(*
+HX: Option type
+*)
 datatype
 myoptn(a:t0ype) =
 | myoptn_none of ()
@@ -9,17 +11,15 @@ myoptn(a:t0ype) =
 //
 fun
 {a:t0ype}
-print_myoptn: myoptn(a) -> void
+print_myoptn: myoptn(a) -> void // print onto STDOUT
 fun
 {a:t0ype}
-prerr_myoptn: myoptn(a) -> void
+prerr_myoptn: myoptn(a) -> void // print onto STDERR
 //
 fun
 {a:t0ype}
 fprint_myoptn
 (out: FILEref, xs: myoptn(a)): void
-fun{}
-fprint_myoptn$sep(out: FILEref): void
 //
 overload print with print_myoptn
 overload prerr with prerr_myoptn

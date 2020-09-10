@@ -3,6 +3,9 @@
 "share/atspre_staload.hats"
 (* ****** ****** *)
 
+(*
+This is a monomorphic version
+*)
 datatype mylist =
 | mylist_nil of ()
 | mylist_cons of
@@ -11,7 +14,7 @@ datatype mylist =
 val list0 = mylist_nil() // []
 val list1 = mylist_cons(1, list0) // [1]
 val list2 = mylist_cons(2, list1) // [2, 1]
-val list3 = mylist_cons(1, list2) // [3, 2, 1]
+val list3 = mylist_cons(3, list2) // [3, 2, 1]
 
 fun
 mylist_length
