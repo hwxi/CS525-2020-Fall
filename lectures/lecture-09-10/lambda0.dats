@@ -7,13 +7,16 @@ applications: t1( t2 )
 
 *)
 
-
+(* ****** ****** *)
 typedef t0var = string
+(* ****** ****** *)
 
 datatype t0erm = // level-0
-| TM0var of t0var
-| TM0lam of (t0var, t0erm)
-| TM0app of (t0erm, t0erm)
+| T0Mvar of t0var
+| T0Mlam of (t0var, t0erm)
+| T0Mapp of (t0erm, t0erm)
+
+(* ****** ****** *)
 
 extern
 fun
@@ -33,11 +36,14 @@ implement
 fprint_t0erm(out, t0) =
 (
 case+ t0 of
-| TM0var(x0) =>
-  fprint!(out, "TM0var(", x0, ")")
-| TM0lam(x0, t0) =>
-  fprint!(out, "TM0lam(", x0, "; ", t0, ")")
-| TM0app(t1, t2) =>
-  fprint!(out, "TM0app(", t1, "; ", t2, ")")
+| T0Mvar(x0) =>
+  fprint!(out, "T0Mvar(", x0, ")")
+| T0Mlam(x0, t0) =>
+  fprint!(out, "T0Mlam(", x0, "; ", t0, ")")
+| T0Mapp(t1, t2) =>
+  fprint!(out, "T0Mapp(", t1, "; ", t2, ")")
 )
 
+(* ****** ****** *)
+
+(* end of [lambda0.dats] *)
