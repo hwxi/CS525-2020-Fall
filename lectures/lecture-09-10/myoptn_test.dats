@@ -10,15 +10,17 @@
 "share/atspre_staload.hats"
 (* ****** ****** *)
 
-val opt0 = myoptn_none{int}()
-val opt1 = myoptn_some{int}(100)
+val opt0 =
+myoptn_none{int}()
+val opt1 =
+myoptn_some{int}(100)
 
 (* ****** ****** *)
 implement main0() =
 (
-println!("opt0 = ", opt0);
-println!("opt1 = ", opt1);
+  println!("opt0 = ", opt0);
+  println!("opt1 = ", opt1);
 )
 (* ****** ****** *)
 
-(* end of [myoptn.dats] *)
+(* end of [myoptn_test.dats] *)
