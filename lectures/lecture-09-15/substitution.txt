@@ -1,0 +1,12 @@
+
+
+(lam x.t1)(t2) // beta-redex=redundant expression
+t1[x -> t2] // contractum of (lam x.t1)(t2)
+
+ K == lam x => lam y => y
+ S == lam x => lam y => lam z => (x(z))(y(z))
+
+ double == lam x => x + x
+ double(5) // redex
+ 5 + 5 // contructum // by beta-reduction
+ 10 // by delta-reduction

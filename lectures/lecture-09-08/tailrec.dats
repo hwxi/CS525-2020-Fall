@@ -65,13 +65,16 @@ in
 end
 
 (* ****** ****** *)
+//
 (*
-MacCarthy's 91-function
+MacCarthy's 91-function:
+The outer recursive call is a tail-call
+The inner recursive call is NOT a tail-call
 *)
 fun
 f91(n: int): int =
 if n > 100 then n - 10 else f91(f91(n+11))
-
+//
 (* ****** ****** *)
 
 #define N 10
