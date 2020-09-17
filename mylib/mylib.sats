@@ -35,6 +35,20 @@ mylist(a:t0ype) =
 (* ****** ****** *)
 //
 fun
+{a:t@ype}
+mylist_sing(x0: a): mylist(a)
+//
+(* ****** ****** *)
+//
+fun
+{a:t@ype}
+mylist_append
+( xs: mylist(a)
+, ys: mylist(a)): mylist(a)
+//
+(* ****** ****** *)
+//
+fun
 {a:t0ype}
 print_mylist: mylist(a) -> void
 fun
