@@ -1,99 +1,89 @@
 (* ****** ****** *)
 //
+// HX-2020-09-17:
+//
+// This one is due
+// Tuesday,
+// the 22nd of September
+//
+(* ****** ****** *)
+#staload "./lambda0.sats"
+(* ****** ****** *)
 #include
 "share/atspre_staload.hats"
-//
 (* ****** ****** *)
-//
+#staload
+"./../../mylib/mylib.sats"
 #staload
 "./../../mylib/mylib.dats"
-//
 (* ****** ****** *)
-(*
+//
+// Please finish
+// the implementation of
+// of the function t0erm_fvset
 //
 (*
-please use your own code:
+Note that you need to implement
+mylist_append and mylist_remove
+If you are not clear about what
+these function are supposed to do,
+please ask your questions on Piazza
 *)
 //
-#staload
-"./../../mylib2/mylib2.sats"
-#staload
-"./../../mylib2/mylib2.dats"
+(* ****** ****** *)
+
+(*
+HX: 20 points
 *)
-//
-(* ****** ****** *)
-
-typedef vnam = string
-typedef opnm = string
-
-(* ****** ****** *)
-
-datatype term = 
-//
-  | TMint of int
-//
-  | TMvar of vnam
-  | TMlam of (vnam, term)
-  | TMapp of (term, term)
-  | TMifz of (term, term, term)
-  | TMfix of (vnam, vnam, term) // Y(lam f.lam x.<body>)
-  | TMopr of (opnm, termlst)
-  | TMtup of (termlst) // tuple construction
-  | TMprj of (term, int) // tuple projection
-
-where termlst = mylist(term)
+(*
+implement
+t0erm_fvset(t0) =
+(
+case+ t0 of
+| T0Mint _ =>
+  mylist_nil()
+| T0Mvar(x0) =>
+  mylist_sing(x0)
+| T0Mapp(t1, t2) =>
+  mylist_append
+  (t0erm_fvset(t1), t0erm_fvset(t2))
+| T0Mlam(x0, t1) =>
+  mylist_remove(t0erm_fvset(t1), x0)
+)
+*)
 
 (* ****** ****** *)
+
+(*
+HX: 10 points
+*)
+(*
+Note that the datatype [t0erm]
+is extended with the following
+constructor:
 //
-// HX: 10 points
-// Please count the number
-// of *free* occurrences of x
-// in a given term t0:
+| T0Mbtf of bool // booleans
 //
-extern
-fun
-tvar_count
-(t0: term, x: vnam): int
-//
-// For instance, there is
-// zero occurrences of x in K;
-// there are two free occurrences
-// of z in x(z)(y(z)).
-//
+which is for representing boolean
+values (true and false). Please make
+changes to the functions t0erm_fprint
+and t0erm_interp accordingly.
+*)
+
 (* ****** ****** *)
-//
-// HX: 10 points:
-// Please implement a function
-// that checks whether a given term
-// is closed, that is, containing no
-// free variables. For instance, both
-// K and S are closed:
-// K = lambda x.lambda y.x
-// S = lambda x.lambda y.lambda z.x(z)(y(z))
-//
-extern
-fun
-term_is_closed(t0: term): bool
-//
-(* ****** ****** *)
-//
-// HX: 20 points:
-// Please study the implemenation of
-// interp2 in lambda0 and then implement
-// the following one using your own library
-// functions:
-//
-extern
-fun
-interp0 : term -> term // call-by-value
-//
-(* ****** ****** *)
-//
-// HX: 10 points:
-// Please construct a lambda-term that corresponds
-// to a function for checking if a given integer is
-// a prime number.
-//
+
+(*
+HX: 10 points
+*)
+(*
+Please extend t0erm_interp
+to handle the following integer
+comparision functions:
+
+<, <=, >, >=, ==, and !=
+
+*)
+
 (* ****** ****** *)
 
 (* end of [assign01.dats] *)
