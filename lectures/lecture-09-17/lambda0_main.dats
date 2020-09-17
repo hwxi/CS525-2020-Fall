@@ -6,8 +6,15 @@
 "share/atspre_staload.hats"
 
 (* ****** ****** *)
-#staload "./../../mylib/mylib.sats"
-#staload "./../../mylib/mylib.dats"
+#staload
+"./../../mylib/mylib.sats"
+#staload
+"./../../mylib/mylib.dats"
+(* ****** ****** *)
+
+#dynload "./lambda0_print.dats"
+#dynload "./lambda0_interp.dats"
+
 (* ****** ****** *)
 
 implement
@@ -20,26 +27,8 @@ case+ t0 of
   1 + t0erm_size(t1)
 | T0Mapp(t1, t2) =>
   1 + t0erm_size(t1) + t0erm_size(t2)
-)
-
-(* ****** ****** *)
-
-implement
-print_t0erm(t0) =
-fprint_t0erm(stdout_ref, t0)
-
-implement
-fprint_t0erm(out, t0) =
-(
-case+ t0 of
-| T0Mint(i0) =>
-  fprint!(out, "T0Mint(", i0, ")")
-| T0Mvar(x0) =>
-  fprint!(out, "T0Mvar(", x0, ")")
-| T0Mlam(x0, t0) =>
-  fprint!(out, "T0Mlam(", x0, "; ", t0, ")")
-| T0Mapp(t1, t2) =>
-  fprint!(out, "T0Mapp(", t1, "; ", t2, ")")
+| T0Mopr2(opr, t1, t2) =>
+  1 + t0erm_size(t1) + t0erm_size(t2)
 )
 
 (* ****** ****** *)
@@ -82,22 +71,14 @@ println!
 ("Hello from [lambda0]!")
 //
 val () =
-println!("size(K) = ", t0erm_size(K))
-//
-val () =
-println!("size(S) = ", t0erm_size(S))
-//
-val () =
-let
-val x0 = "x"
-val t0 = T0Mapp(T0Mvar(x0), T0Mvar(x0))
-val sub = T0Mint(5)
-in
 println!
-("subst(", t0, "; ", x0, "; ", sub, ") = ", t0erm_subst(t0, x0, sub))
-end
+("size(K) = ", t0erm_size(K))
 //
-}
+val () =
+println!
+("size(S) = ", t0erm_size(S))
+//
+} (* end of [main0] *)
 
 (* ****** ****** *)
 
