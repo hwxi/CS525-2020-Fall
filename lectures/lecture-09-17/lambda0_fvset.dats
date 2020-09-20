@@ -12,6 +12,34 @@ mylist_remove
 
 (* ****** ****** *)
 
+(*
+//
+// HX-2020-09-20:
+// For your reference
+//
+implement
+{a}
+mylist_remove
+  (xs, x0) =
+  remove(xs) where
+{
+fun
+remove
+(xs: mylist(a)): mylist(a) =
+(
+case+ xs of
+| mylist_nil() => mylist_nil()
+| mylist_cons(x1, xs) =>
+  if
+  geq_val_val<a>(x0, x1)
+  then remove(xs)
+  else mylist_cons(x1, remove(xs))
+)
+}
+*)
+
+(* ****** ****** *)
+
 implement
 t0erm_fvset(t0) =
 (
