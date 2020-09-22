@@ -11,8 +11,6 @@ mylist_remove
 (xs: mylist(a), x0: a): mylist(a)
 
 (* ****** ****** *)
-
-(*
 //
 // HX-2020-09-20:
 // For your reference
@@ -36,10 +34,10 @@ case+ xs of
   else mylist_cons(x1, remove(xs))
 )
 }
-*)
 
 (* ****** ****** *)
 
+(*
 implement
 t0erm_fvset(t0) =
 (
@@ -54,6 +52,7 @@ case+ t0 of
 | T0Mlam(x0, t1) =>
   mylist_remove(t0erm_fvset(t1), x0)
 )
+*)
 
 (* ****** ****** *)
 
