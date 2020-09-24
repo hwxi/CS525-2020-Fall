@@ -1,0 +1,7 @@
+call-by-name
+
+(lam x => t1)(t2) => t1[x -> t2]
+
+call-by-value
+
+(lam x => t1)(t2) => t1[x -> eval(t2)]
