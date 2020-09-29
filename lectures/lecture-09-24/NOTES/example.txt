@@ -1,0 +1,63 @@
+
+(*
+recurse: go back
+*)
+fun
+fact(x) =
+(*
+if x > 0 then x * fact(x-1) else 1
+*)
+(lam f => if x > 0 then x * f(x-1) else 1)(fact)
+
+fun
+fibo(x) =
+(*
+if x >= 2 then fibo(x-1) + fibo(x-2) else x
+*)
+(lam f => if x >= 2 then f(x-1) + f(x-2) else x)(fibo)
+
+(*
+fun
+foo(x) = (lam f => ...)(foo)
+fun foo = (lam f => (lam x => ...))(foo)
+*)
+
+================================================
+
+fun
+fibo(x) =
+if x >= 2 then fibo(x-1) + fibo(x-2) else x
+
+fun
+fibo =
+(
+lam f =>
+lam x =>
+if x >= 2 then f(x-1) + f(x-2) else x)(fibo)
+
+================================================
+
+fun foo = F(foo) // foo is a fixed-point of F
+
+What is a fixed-point operator?
+Y is a fixed-point operator if Y(F) = F(Y(F)) for any
+term F
+
+================================================
+
+fun
+fibo =
+Y
+(
+lam f =>
+lam x =>
+if x >= 2 then f(x-1) + f(x-2) else x)
+
+================================================
+
+Y =
+
+lam f =>
+(
+(lam x => f(x(x)))(lam x => f(x(x)))
+)
