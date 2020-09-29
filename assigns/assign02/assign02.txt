@@ -1,6 +1,7 @@
 ############ beg of [README] ############
 
 Total: 40 points
+Due Time: Tuesday, the 6th of October
   
 ##########################################
 
@@ -16,7 +17,7 @@ Please finish these cases: TMtup and TMprj
 
 Part 2: 20 points
 Please encode the following coin-changes program
-in lambda1:
+in lambda0:
 
 http://ats-lang.sourceforge.net/DOCUMENT/INT2PROGINATS/HTML/HTMLTOC/x597.html 
 
