@@ -1,0 +1,23 @@
+############ beg of [README] ############
+
+Total: 40 points
+  
+##########################################
+
+Part 1: 20 points
+The code in lambda0 is yet to be
+finished for the following cases:
+
+TMtup, TMprj
+
+Please finish these cases: TMtup and TMprj
+
+##########################################
+
+Part 2: 20 points
+Please encode the following coin-changes program
+in lambda1:
+
+http://ats-lang.sourceforge.net/DOCUMENT/INT2PROGINATS/HTML/HTMLTOC/x597.html 
+
+############# end of [README] #############
