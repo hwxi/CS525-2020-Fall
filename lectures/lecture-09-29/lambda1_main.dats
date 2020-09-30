@@ -15,15 +15,43 @@
 
 (* ****** ****** *)
 
-implement
-main0() =
-{
-//
-val () =
-println!("Hello from [lambda1]!")
-//
-} (* end of [main0] *)
+implement main0() = ((*dummy*))
 
 (* ****** ****** *)
 
-(* end of [lambda1.dats] *)
+val () =
+println!("Hello from [lambda1]!")
+
+(* ****** ****** *)
+
+val
+fact =
+let
+val f = T0Mvar("f")
+val x = T0Mvar("x")
+in
+T0Mfix1
+(
+"f"
+,
+T0Mlam("x",
+T0Mcond(
+T0Mopr2(">", x, T0Mint(0))
+,
+T0Mopr2("*", x, T0Mapp(f, T0Mopr2("-", x, T0Mint(1))))
+,
+T0Mint(1)
+)
+)
+)
+end // end of [let]
+
+(* ****** ****** *)
+
+val fact10 =
+t0erm_eval0(T0Mapp(fact, T0Mint(10)))
+val () = println!("fact(10) = ", fact10)
+
+(* ****** ****** *)
+
+(* end of [lambda1_main.dats] *)

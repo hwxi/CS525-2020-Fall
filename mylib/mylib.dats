@@ -30,11 +30,12 @@ fprint_myoptn
 (
 case+ xs of
 |
-myoptn_none() => 
-fprint(out, "none()")
+myoptn_nil() => 
+fprint(out, "nil()")
 |
-myoptn_some(x0) =>
-(fprint(out, "some(");fprint_val<a>(out, x0);fprint(out, ")"))
+myoptn_cons(x0) =>
+( fprint(out, "cons(")
+; fprint_val<a>(out, x0); fprint(out, ")"))
 ) (* end of [fprint_myoptn] *)
 (* ****** ****** *)
 

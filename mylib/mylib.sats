@@ -4,8 +4,8 @@ HX: Option type
 *)
 datatype
 myoptn(a:t0ype) =
-| myoptn_none of ()
-| myoptn_some of (a)
+| myoptn_nil of ()
+| myoptn_cons of (a)
 
 (* ****** ****** *)
 //

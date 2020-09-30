@@ -63,15 +63,23 @@ datatype
 value =
 | VALint of (int)
 | VALbtf of (bool)
-| VALclo of (t0erm, envir)
+| VALlam of (t0erm, envir)
+| VALfix of (t0var, value)
 
 and
 envir =
-ENVIR of mylist( @(t0var, value) )
+ENVIR of mylist(@(t0var, value))
 
 (* ****** ****** *)
-
-
+//
+fun
+print_value(value): void
+fun
+fprint_value(FILEref, value): void
+//
+overload print with print_value
+overload fprint with fprint_value
+//
 (* ****** ****** *)
 
 fun

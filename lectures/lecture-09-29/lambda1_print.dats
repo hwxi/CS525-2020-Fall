@@ -48,7 +48,30 @@ case+ t0 of
 )
 
 (* ****** ****** *)
+implement
+print_value(v0) =
+fprint_value(stdout_ref, v0)
+(* ****** ****** *)
+
+implement
+fprint_value(out, v0) =
+(
+case+ v0 of
+| VALint(i0) =>
+  fprint!(out, "VALint(", i0, ")")
+| VALbtf(b0) =>
+  fprint!(out, "VALbtf(", b0, ")")
+| VALlam(t0, env) =>
+  fprint!
+  (out, "VALlam(", t0, "; ", "...", ")")
+| VALfix(f0, vlam) =>
+  fprint!(out, "VALfix(", f0, "; ", vlam, ")")
+)
+
+(* ****** ****** *)
+(*
 val () = println!("[lambda1_print] is loaded")
+*)
 (* ****** ****** *)
 
 (* end of [lambda1_print.dats] *)
