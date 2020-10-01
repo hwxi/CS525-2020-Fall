@@ -173,7 +173,7 @@ x // else-return
 )
 )
 )
-end // end of [let]
+end // end of [let] // end of [val]
 
 (* ****** ****** *)
 

@@ -64,7 +64,7 @@ value =
 | VALint of (int)
 | VALbtf of (bool)
 | VALlam of (t0erm, envir)
-| VALfix of (t0var, value)
+| VALfix of (t0var, value(*VALlam*))
 
 and
 envir =

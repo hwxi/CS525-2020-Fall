@@ -39,7 +39,8 @@ auxlst
 ) : myoptn(value) =
 (
 case+ xvs of
-| mylist_nil() => myoptn_nil()
+| mylist_nil() =>
+  myoptn_nil()
 | mylist_cons(xv1, xvs) =>
   if x0 = xv1.0
   then myoptn_cons(xv1.1) else auxlst(xvs)
