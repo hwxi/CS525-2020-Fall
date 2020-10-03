@@ -87,4 +87,14 @@ overload fprint with fprint_mylist
 //
 (* ****** ****** *)
 
+fun
+{a:t@ype}
+{b:t@ype}
+mylist_map
+( xs
+: mylist(a)
+, f0: (a) -<cloref> b): mylist(b)
+
+(* ****** ****** *)
+
 (* end of [mylib.sats] *)

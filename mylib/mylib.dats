@@ -124,4 +124,25 @@ case+ xs of
 
 (* ****** ****** *)
 
+implement
+{a}{b}
+mylist_map
+(xs, f0) =
+auxlst(xs) where
+{
+fun
+auxlst
+( xs
+: mylist(a)): mylist(b) =
+(
+case+ xs of
+| mylist_nil() =>
+  mylist_nil()
+| mylist_cons(x0, xs) =>
+  mylist_cons(f0(x0), auxlst(xs))
+)
+}
+
+(* ****** ****** *)
+
 (* end of [mylib.dats] *)
