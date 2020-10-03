@@ -122,6 +122,10 @@ case+ xs of
 )
 } (* end of [mylist_get_at] *)
 
+implement
+{a}
+mylist_nth_opt = mylist_get_at<a>
+
 (* ****** ****** *)
 
 implement

@@ -64,6 +64,11 @@ fun
 mylist_get_at
 ( xs
 : mylist(a), i0: int): myoptn(a)
+fun
+{a:t@ype}
+mylist_nth_opt
+( xs
+: mylist(a), i0: int): myoptn(a)
 //
 (* ****** ****** *)
 //
