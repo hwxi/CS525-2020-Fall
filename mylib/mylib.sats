@@ -9,12 +9,15 @@ myoptn(a:t0ype) =
 
 (* ****** ****** *)
 //
+// print onto STDOUT
 fun
 {a:t0ype}
-print_myoptn: myoptn(a) -> void // print onto STDOUT
+print_myoptn: myoptn(a) -> void
+//
+// print onto STDERR
 fun
 {a:t0ype}
-prerr_myoptn: myoptn(a) -> void // print onto STDERR
+prerr_myoptn: myoptn(a) -> void
 //
 fun
 {a:t0ype}
@@ -40,11 +43,27 @@ mylist_sing(x0: a): mylist(a)
 //
 (* ****** ****** *)
 //
+// For list concatenation
+//
 fun
 {a:t@ype}
 mylist_append
 ( xs: mylist(a)
 , ys: mylist(a)): mylist(a)
+//
+(* ****** ****** *)
+//
+// For finding element [i0]
+// in a given list. For instance,
+// mylist_get_at(xs, 0) returns
+// the head of [xs] (if [xs] is
+// not empty)
+//
+fun
+{a:t@ype}
+mylist_get_at
+( xs
+: mylist(a), i0: int): myoptn(a)
 //
 (* ****** ****** *)
 //
