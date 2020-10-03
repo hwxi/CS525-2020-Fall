@@ -27,6 +27,13 @@ t0erm_subst
 , x0: t0var
 , sub: t0erm): t0erm
 (* ****** ****** *)
+extern
+fun
+t0ermlst_subst
+( ts: t0ermlst
+, x0: t0var
+, sub: t0erm): t0ermlst
+(* ****** ****** *)
 
 implement
 t0erm_subst
@@ -66,12 +73,44 @@ case+ t0 of
   , t0erm_subst(t1, x0, sub)
   , t0erm_subst(t2, x0, sub))
 //
+| T0Moprs(opr, ts) =>
+  T0Moprs
+  ( opr
+  , t0ermlst_subst(ts, x0, sub))
+//
 | T0Mcond(t1, t2, t3) =>
   T0Mcond
   ( t0erm_subst(t1, x0, sub)
   , t0erm_subst(t2, x0, sub)
   , t0erm_subst(t3, x0, sub))
 )
+
+(* ****** ****** *)
+
+implement
+t0ermlst_subst
+(ts, x0, sub) =
+(
+  auxlst(ts)
+) where
+{
+fun
+auxlst
+( ts
+: t0ermlst): t0ermlst =
+(
+case+ ts of
+| mylist_nil() =>
+  mylist_nil()
+| mylist_cons(t0, ts) =>
+  mylist_cons
+  (t0, auxlst(ts)) where
+  {
+    val t0 =
+    t0erm_subst(t0, x0, sub)
+  }
+)
+}
 
 (* ****** ****** *)
 
@@ -122,33 +161,50 @@ end
 |
 T0Mopr2(opr, t1, t2) =>
 let
-  val t1 = t0erm_interp(t1)
-  val t2 = t0erm_interp(t2)
+val t1 = t0erm_interp(t1)
+val t2 = t0erm_interp(t2)
 in
-  case+ opr of
-  | "+" =>
-    let
-    val-T0Mint(i1) = t1
-    val-T0Mint(i2) = t2 in T0Mint(i1 + i2)
-    end
-  | "-" =>
-    let
-    val-T0Mint(i1) = t1
-    val-T0Mint(i2) = t2 in T0Mint(i1 - i2)
-    end
-  | "*" =>
-    let
-    val-T0Mint(i1) = t1
-    val-T0Mint(i2) = t2 in T0Mint(i1 * i2)
-    end
-  | _ (* else *) =>
-    let
-      val () =
-      println!
-      ("t0erm_interp: opr = ", opr)
-      val () = assertloc(false) in exit(1)
-    end
-end
+case+ opr of
+| "+" =>
+  let
+  val-T0Mint(i1) = t1
+  val-T0Mint(i2) = t2 in T0Mint(i1 + i2)
+  end
+| "-" =>
+  let
+  val-T0Mint(i1) = t1
+  val-T0Mint(i2) = t2 in T0Mint(i1 - i2)
+  end
+| "*" =>
+  let
+  val-T0Mint(i1) = t1
+  val-T0Mint(i2) = t2 in T0Mint(i1 * i2)
+  end
+| _ (* else *) =>
+  let
+    val () =
+    println!
+    ("t0erm_interp: opr = ", opr)
+    val () = assertloc(false) in exit(1)
+  end
+end // end of [T0Mopr2]
+//
+|
+T0Moprs(opr, ts) =>
+let
+val ts =
+t0ermlst_interp(ts)
+in
+//
+case+ opr of
+| _ (* else *) =>
+  let
+    val () =
+    println!
+    ("t0erm_interp: opr = ", opr)
+    val () = assertloc(false) in exit(1)
+  end  
+end // end of [T0Moprs]
 //
 |
 T0Mcond(t1, t2, t3) =>
@@ -163,6 +219,32 @@ in
 end
 //
 )
+(* ****** ****** *)
+
+implement
+t0ermlst_interp
+  (ts) =
+(
+  auxlst(ts)
+) where
+{
+fun
+auxlst
+( ts
+: t0ermlst): t0ermlst =
+(
+case+ ts of
+| mylist_nil() =>
+  mylist_nil()
+| mylist_cons(t0, ts) =>
+  mylist_cons
+  (t0, auxlst(ts)) where
+  {
+    val t0 = t0erm_interp(t0)
+  }
+)
+} (* end of [t0ermlst_interp] *)
+
 (* ****** ****** *)
 val () = println!("[lambda0_interp] is loaded")
 (* ****** ****** *)

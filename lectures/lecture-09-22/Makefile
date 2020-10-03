@@ -29,8 +29,8 @@ lambda0_interp_dats.o : \
 lambda0.sats lambda0_interp.dats ; $(PATSCC) -o $@ -c lambda0_interp.dats
 
 ######
-lambda0_fvset_dats.o : \
-lambda0.sats lambda0_fvset.dats ; $(PATSCC) -o $@ -c lambda0_fvset.dats
+# lambda0_fvset_dats.o : \
+# lambda0.sats lambda0_fvset.dats ; $(PATSCC) -o $@ -c lambda0_fvset.dats
 ######
 
 clean:: ; rm -f *_?ats.c

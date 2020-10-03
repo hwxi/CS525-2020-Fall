@@ -9,9 +9,9 @@
 #staload
 "./../../mylib/mylib.dats"
 (* ****** ****** *)
-
+(*
 #staload "./lambda0_fvset.dats"
-
+*)
 (* ****** ****** *)
 
 #dynload "./lambda0_print.dats"

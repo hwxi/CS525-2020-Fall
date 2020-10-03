@@ -30,12 +30,15 @@ datatype t0erm = // level-0
 | T0Mbool of (bool)
 | T0Mopr1 of (t0opr, t0erm)
 | T0Mopr2 of (t0opr, t0erm, t0erm)
+| T0Moprs of (t0opr, t0ermlst)
 //
 // (cond ? then : else)
 //
 | T0Mcond of 
   ( t0erm(*cond*)
   , t0erm(*then*), t0erm(*else*))
+//
+where t0ermlst = mylist(t0erm)
 //
 (* ****** ****** *)
 fun
@@ -59,6 +62,8 @@ overload fprint with fprint_t0erm
 
 fun
 t0erm_interp(t0erm): t0erm
+fun
+t0ermlst_interp(t0ermlst): t0ermlst
 
 (* ****** ****** *)
 

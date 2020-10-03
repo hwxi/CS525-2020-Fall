@@ -1,7 +1,19 @@
 (* ****** ****** *)
 #staload "./lambda0.sats"
 (* ****** ****** *)
-#staload "./../../mylib/mylib.sats"
+#staload
+"./../../mylib/mylib.sats"
+#staload
+_(*TMP*) =
+"./../../mylib/mylib.dats"
+(* ****** ****** *)
+#include
+"share/atspre_staload.hats"
+(* ****** ****** *)
+
+implement
+fprint_val<t0erm> = fprint_t0erm
+
 (* ****** ****** *)
 implement
 print_t0erm(t0) =
@@ -34,6 +46,9 @@ case+ t0 of
   fprint!
   ( out
   , "T0Mopr2(", x0, "; ", t1, "; ", t2, ")")
+| T0Moprs(x0, ts) =>
+  fprint!
+  (out, "T0Mopr2(", x0, "; ", ts, ")")
 //
 | T0Mcond(t1, t2, t3) =>
   fprint!
