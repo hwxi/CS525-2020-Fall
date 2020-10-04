@@ -98,7 +98,7 @@ fun
 mylist_map
 ( xs
 : mylist(a)
-, f0: (a) -<cloref> b): mylist(b)
+, f0: (a) -<cloref1> b): mylist(b)
 
 (* ****** ****** *)
 
