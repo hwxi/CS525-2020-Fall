@@ -62,6 +62,8 @@ datatype t0erm = // level-0
   (t0var, type0, t0erm)
 | T0Mapp of (t0erm, t0erm)
 //
+| T0Mtup of (t0erm, t0erm)
+//
 (* ****** ****** *)
 fun
 print_t0erm
