@@ -1,12 +1,26 @@
 ############ beg of [README] ############
 
-Total: 70 points
+This assignment prepares you for the midterm.
+You are asked to implement a type-checker for
+the LAMBDA language whose syntax is given in
+the file lambda2.sats.
+
+Please extend the implementation given in
+lectures/lecture-10-08 to handle the following
+language constructs.
+
+##########################################
+
+Total: 80 points
+
+##########################################
+
 (
-T0Mfix: 20
+T0Mfix: 20 points
 T0Mopr1/
-T0Mopr2: 20
-T0Mcond: 20
-T0Mfst/T0Msnd: 10
+T0Mopr2: 20 points
+T0Mcond: 20 points
+T0Mfst/T0Msnd: 10 points
 )
 Due Time: Thursday, the 15th of October
   
