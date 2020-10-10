@@ -26,7 +26,7 @@ datatype t0erm = // level-0
 | T0Mopr1 of (t0opr, t0erm)
 | T0Mopr2 of (t0opr, t0erm, t0erm)
 //
-| T0Mfix1 of (t0var, t0erm)
+| T0Mfix1 of (t0var, type0, t0erm)
 //
 // HX-2020-09:
 // conditional:

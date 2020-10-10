@@ -1,0 +1,21 @@
+############ beg of [README] ############
+
+Total: 70 points
+(
+T0Mfix: 20
+T0Mopr1/
+T0Mopr2: 20
+T0Mcond: 20
+T0Mfst/T0Msnd: 10
+)
+Due Time: Thursday, the 15th of October
+  
+##########################################
+
+Part 2: 10 points
+Please encode the following coin-changes program
+in lambda2:
+
+http://ats-lang.sourceforge.net/DOCUMENT/INT2PROGINATS/HTML/HTMLTOC/x597.html 
+
+############# end of [README] #############
