@@ -63,9 +63,10 @@ case+ tm of
   fprint!
   ( out
   , "T0Mopr2(", opr, "; ", tm1, "; ", tm2, ")")
-//
+(*
 | T0Moprs(opr, tms) =>
   fprint!(out, "T0Moprs(", opr, "; ", tms, ")")
+*)
 //
 | T0Manno(tm1, tp2) =>
   fprint!(out, "T0Manno(", tm1, "; ", tp2, ")")

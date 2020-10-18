@@ -20,12 +20,17 @@ where type0lst = mylist(type0)
   and type0opt = myoptn(type0)
 //
 (* ****** ****** *)
-
-val T0Pnil: type0
-val T0Pint: type0
-val T0Pbool: type0
-val T0Pstring: type0
-
+//
+val T0Pnil: type0 // nil
+//
+val T0Pint: type0 // int
+//
+val T0Pbtf: type0 // bool
+val T0Pbool: type0 // bool
+//
+val T0Pstr: type0 // string
+val T0Pstring: type0 // string
+//
 (* ****** ****** *)
 
 fun
@@ -78,8 +83,10 @@ and t0erm =
   (t0opr, t0erm)
 | T0Mopr2 of
   (t0opr, t0erm, t0erm)
+(*
 | T0Moprs of
   (t0opr, t0ermlst)
+*)
 //
 | T0Mfst of (t0erm)
 | T0Msnd of (t0erm)

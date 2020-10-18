@@ -36,6 +36,8 @@ in
 case- tm0 of
 |
 T0Mint(_) => T0Pint
+|
+T0Mstr(_) => T0Pstr
 //
 |
 T0Mvar(x0) =>
@@ -83,6 +85,125 @@ let
   end
 //
 |
+T0Mfix1
+(f0, tp1, tm2) =>
+let
+val-true = (tp1 = tp2) in tp1
+end where
+{
+  val
+  senv =
+  senv_extend
+  (senv, f0, tp1)
+  val tp2 =
+  t0erm_tcheck1(tm2, senv)
+}
+//
+|
+T0Mopr2
+(opr, tm1, tm2) =>
+let
+val tp1 = tcheck1(tm1)
+val tp2 = tcheck1(tm2)
+in
+//
+case- opr of
+|
+"+" =>
+let
+val-true= (T0Pint=tp1)
+val-true= (T0Pint=tp2) in T0Pint
+end
+|
+"-" =>
+let
+val-true= (T0Pint=tp1)
+val-true= (T0Pint=tp2) in T0Pint
+end
+|
+"*" =>
+let
+val-true= (T0Pint=tp1)
+val-true= (T0Pint=tp2) in T0Pint
+end
+|
+"/" =>
+let
+val-true= (T0Pint=tp1)
+val-true= (T0Pint=tp2) in T0Pint
+end
+|
+">" =>
+let
+val-true= (T0Pint=tp1)
+val-true= (T0Pint=tp2) in T0Pbool
+end
+|
+"<" =>
+let
+val-true= (T0Pint=tp1)
+val-true= (T0Pint=tp2) in T0Pbool
+end
+|
+"=" =>
+let
+val-true= (T0Pint=tp1)
+val-true= (T0Pint=tp2) in T0Pbool
+end
+|
+">=" =>
+let
+val-true= (T0Pint=tp1)
+val-true= (T0Pint=tp2) in T0Pbool
+end
+|
+"<=" =>
+let
+val-true= (T0Pint=tp1)
+val-true= (T0Pint=tp2) in T0Pbool
+end
+|
+"==" =>
+let
+val-true= (T0Pint=tp1)
+val-true= (T0Pint=tp2) in T0Pbool
+end
+|
+"!=" =>
+let
+val-true= (T0Pint=tp1)
+val-true= (T0Pint=tp2) in T0Pbool
+end
+//
+end // end of [T0Mopr2]
+//
+|
+T0Mfst(tup) =>
+let
+val tp0 = tcheck1(tup)
+in
+case- tp0 of
+| T0Ptup(tp1, _) => tp1
+end
+|
+T0Msnd(tup) =>
+let
+val tp0 = tcheck1(tup)
+in
+case- tp0 of
+| T0Ptup(_, tp2) => tp2
+end
+|
+T0Mtup(tm1, tm2) =>
+(
+  T0Ptup(tp1, tp2)
+) where
+{
+val tp1 = tcheck1(tm1)
+val tp2 = tcheck1(tm2)
+}
+//
+|
 T0Manno(tm1, tp2) =>
 let
   val tp1 = tcheck1(tm1)
@@ -93,24 +214,28 @@ let
   val-true = eq_type0_type0(tp1, tp2)
 in
   tp2
-end
+end // end of [T0Manno]
+//
+|
+T0Mcond
+(tm1, tm2, opt) =>
+let
+val-true =
+(T0Pbool = tp1)
+val-true = (tp2 = tp3) in tp2
+end where
+{
+  val tp1 = tcheck1(tm1)
+  val tp2 = tcheck1(tm2)
+  val tp3 =
+  (
+  case+ opt of
+  | myoptn_nil() => T0Pnil
+  | myoptn_cons(tm3) => tcheck1(tm3)
+  ) : type0 // end-of-val
+}
 //
 end // end of [let]
-
-(* ****** ****** *)
-////
-
-implement
-t0erm_typeck0
-  (env?. prog) =
-(
-case+ prog of
-| T0Mint(_) => T0Pint
-//
-| T0Mvar(x0) =>
-//
-//
-)
 
 (* ****** ****** *)
 

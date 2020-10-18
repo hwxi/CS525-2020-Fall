@@ -656,32 +656,27 @@ None() =>
   T0Mapp(t0m1, t0m2)
 ) where
 {
-  val
-  t0m1 = d1exp2t0erm(d1e1)
-  val
-  t0m2 = d1exp2t0erm(d1e2)
+val
+t0m1 = d1exp2t0erm(d1e1)
+val
+t0m2 = d1exp2t0erm(d1e2)
 }
 |
 Some(opnm) =>
 (
-  T0Moprs(opnm, t0ms)
-) where
-{
-val t0ms =
-(
 case+
 d1e2.node() of
-| D1Elist(d1es) =>
-  d1exp2t0erm_lst(d1es)
+(*
+|
+D1Elist(d1es) =>
+T0Moprs
+( opnm
+, d1exp2t0erm_lst(d1es))
+*)
 | _(*non-D1Elist*) =>
-  let
-  val t0m2 =
-  d1exp2t0erm(d1e2)
-  in
-  mylist_cons(t0m2, mylist_nil())
-  end
-) : t0ermlst // end-of-val
-}
+  T0Mopr1
+  (opnm, d1exp2t0erm(d1e2))
+)
 //
 end // end of [auxapp1]
 
@@ -705,17 +700,18 @@ case+ opt1 of
 |
 None() =>
 let
-val t0m1 = d1exp2t0erm(d1e1)
+val
+t0f1 = d1exp2t0erm(d1e1)
 in
-  T0Mapp(t0m1, T0Mtup(t0m2, t0m3))
+  T0Mapp
+  ( t0f1
+  , T0Mtup(t0m2, t0m3))
 end
 |
 Some(opr1) =>
-T0Moprs
-( opr1
-, mylist_cons
-  (t0m2, mylist_cons(t0m3, mylist_nil()))
-) (* end of [Some] *)
+(
+  T0Mopr2(opr1, t0m2, t0m3)
+)
 //
 end // end of [auxapp2]
 
@@ -1081,8 +1077,12 @@ val-
 myoptn_cons(t0m0) = mopt
 //
 val () =
-println!
-("process_fpath: t0m0 = ", t0m0)
+println!("input: t0m0 = ", t0m0)
+//
+val
+t0p0 = t0erm_tcheck0(t0m0)
+val () =
+println!("result: t0p0 = ", t0p0)
 //
 } (* end of [then] *)
 else

@@ -6,16 +6,22 @@
 (* ****** ****** *)
 #include "share/atspre_staload.hats"
 (* ****** ****** *)
-
+//
 implement
 T0Pnil = T0Pbas("nil")
 implement
 T0Pint = T0Pbas("int")
+//
+implement
+T0Pbtf = T0Pbas("bool")
 implement
 T0Pbool = T0Pbas("bool")
+//
+implement
+T0Pstr = T0Pbas("string")
 implement
 T0Pstring = T0Pbas("string")
-
+//
 (* ****** ****** *)
 
 implement
