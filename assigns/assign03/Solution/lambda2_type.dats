@@ -26,20 +26,22 @@ case+ tp1 of
 |
 T0Pbas(nm1) =>
 (
-  case+ tp2 of
-  | T0Pbas(nm2) => (nm1 = nm2) | _ => false
+case+ tp2 of
+| T0Pbas(nm2) => (nm1 = nm2) | _ => false
 )
 |
 T0Pfun(tp11, tp12) =>
 (
-  case+ tp2 of
-  | T0Pfun(tp21, tp22) => (tp11 = tp21) && (tp12 = tp22) | _ => false
+case+ tp2 of
+| T0Pfun(tp21, tp22) =>
+  (tp11 = tp21) && (tp12 = tp22) | _ => false
 )
 |
 T0Ptup(tp11, tp12) =>
 (
-  case+ tp2 of
-  | T0Ptup(tp21, tp22) => (tp11 = tp21) && (tp12 = tp22) | _ => false
+case+ tp2 of
+| T0Ptup(tp21, tp22) =>
+  (tp11 = tp21) && (tp12 = tp22) | _ => false
 )
 )
 

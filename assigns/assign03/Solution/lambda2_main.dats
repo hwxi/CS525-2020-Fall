@@ -1123,11 +1123,10 @@ let
 //
 val
 XATSHOME =
-"./../xanadu-2020-10-18"
+"./../../../xanadu-2020-10-18"
 //
 val
-((*void*)) =
-the_fixity_load(XATSHOME)
+((*void*)) = the_fixity_load(XATSHOME)
 //
 in
 if

@@ -81,6 +81,8 @@ and t0erm =
 | T0Moprs of
   (t0opr, t0ermlst)
 //
+| T0Mfst of (t0erm)
+| T0Msnd of (t0erm)
 | T0Mtup of (t0erm, t0erm)
 //
 | T0Manno of (t0erm, type0)
