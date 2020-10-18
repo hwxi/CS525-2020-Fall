@@ -1,8 +1,9 @@
 (* ****** ****** *)
 #staload
 "./../../mylib/mylib.sats"
+(* ****** ****** *)
 (*
-Please staload your own library
+Please staload your own library here
 *)
 (* ****** ****** *)
 
@@ -120,4 +121,4 @@ t0erm_tcheck1
 //
 (* ****** ****** *)
 
-(* end of [lambda1.sats] *)
+(* end of [lambda2.sats] *)
