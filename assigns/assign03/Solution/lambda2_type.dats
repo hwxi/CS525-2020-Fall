@@ -8,6 +8,8 @@
 (* ****** ****** *)
 
 implement
+T0Pnil = T0Pbas("nil")
+implement
 T0Pint = T0Pbas("int")
 implement
 T0Pbool = T0Pbas("bool")

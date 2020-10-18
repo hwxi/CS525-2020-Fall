@@ -346,7 +346,7 @@ tok.node() of
 | D1Panno(d1p1, _) => auxd1p(d1p1)
 )
 fun
-auxann
+auxanno
 ( f1as
 : f1arglst
 )
@@ -393,7 +393,7 @@ f1as2x0nam
 fun
 f1as2type0
 ( f1as
-: f1arglst): type0opt = auxann(f1as)
+: f1arglst): type0opt = auxanno(f1as)
 
 end // end of [local]
 

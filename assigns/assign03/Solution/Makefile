@@ -7,6 +7,15 @@
 PATSCC=$(PATSHOME)/bin/patscc
 
 ######
+XANADU=\
+"./../../../xanadu-2020-10-18"
+######
+CFLAGS :=
+CFLAGS += -DATS_MEMALLOC_GCBDW
+######
+INCLUDE :=
+INCLUDE += -I$(XANADU)/srcgen/xats
+######
 
 OBJECTS :=
 OBJECTS += \
@@ -23,7 +32,8 @@ lambda2_tcheck_dats.o
 lambda2 : \
 lambda2_main.dats $(OBJECTS) ; \
 patscc -o lambda2 \
--DATS_MEMALLOC_LIBC lambda2_main.dats $(OBJECTS)
+$(INCLUDE) $(CFLAGS) \
+lambda2_main.dats $(OBJECTS) -L$(XANADU)/lib -lxatsopt -lgc
 
 ######
 
