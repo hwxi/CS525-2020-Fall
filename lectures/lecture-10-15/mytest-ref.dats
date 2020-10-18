@@ -16,4 +16,4 @@ val () = println!("r1[] = ", r1[])
 
 (* ****** ****** *)
 
-(* end of [mytest.dats] *)
+(* end of [mytest-ref.dats] *)

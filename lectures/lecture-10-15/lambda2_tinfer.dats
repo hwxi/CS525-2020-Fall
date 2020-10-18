@@ -106,20 +106,5 @@ end
 end // end of [let]
 
 (* ****** ****** *)
-////
-
-implement
-t0erm_typeck0
-  (env?. prog) =
-(
-case+ prog of
-| T0Mint(_) => T0Pint
-//
-| T0Mvar(x0) =>
-//
-//
-)
-
-(* ****** ****** *)
 
 (* end of [lambda2_typeck.dats] *)
