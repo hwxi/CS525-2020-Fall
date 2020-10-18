@@ -24,7 +24,7 @@ Then please mirror-push the class repo into your own repo:
 cd CS525-2020-Fall
 git push --mirror https://github.com/hwxi/CS525-2020-Fall-hwxi
 git clone https://github.com/hwxi/CS525-2020-Fall-hwxi
-git remote add upstream https://hwxi@github.com/hwxi/CS525-2020-FALL.git
+git remote add upstream https://hwxi@github.com/hwxi/CS525-2020-Fall.git
 ```
 
 Step 3:
