@@ -117,18 +117,18 @@ overload fprint with fprint_t0erm
 (* ****** ****** *)
 
 datatype
-senv =
-SENV of
+s0env =
+S0ENV of
 mylist(@(t0var, type0))
 
 (* ****** ****** *)
 
 fun
-senv_extend
-(senv, t0var, type0): senv
+s0env_extend
+(s0env, t0var, type0): s0env
 fun
-senv_search
-(senv, t0var): myoptn(type0)
+s0env_search
+(s0env, t0var): myoptn(type0)
 
 (* ****** ****** *)
 //
@@ -140,8 +140,47 @@ t0erm_tcheck0
 (prog: t0erm): type0
 fun
 t0erm_tcheck1
-(t0m: t0erm, senv: senv): type0
+(t0m0: t0erm, senv: s0env): type0
 //
+(* ****** ****** *)
+
+datatype
+value =
+//
+| VALnil of ()
+//
+| VALint of (int)
+| VALbtf of (bool)
+| VALstr of string
+//
+| VALtup of (value, value)
+| VALlam of (t0erm, d0env)
+| VALfix of (t0var, value(*lam*))
+//
+and
+d0env =
+| D0ENV of
+  mylist(@(t0var, value))
+
+where valuelst = mylist(value)
+
+(* ****** ****** *)
+//
+fun
+print_value(value): void
+fun
+fprint_value(FILEref, value): void
+//
+overload print with print_value
+overload fprint with fprint_value
+//
+(* ****** ****** *)
+
+fun
+t0erm_interp0(prog: t0erm): value
+fun
+t0erm_interp1(t0m: t0erm, env: d0env): value
+
 (* ****** ****** *)
 
 (* end of [lambda2.sats] *)

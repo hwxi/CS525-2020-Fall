@@ -26,6 +26,8 @@ OBJECTS += \
 lambda2_senv_dats.o
 OBJECTS += \
 lambda2_tcheck_dats.o
+OBJECTS += \
+lambda2_interp_dats.o
 
 ######
 
@@ -48,6 +50,17 @@ lambda2.sats lambda2_senv.dats ; $(PATSCC) -o $@ -c lambda2_senv.dats
 
 lambda2_tcheck_dats.o : \
 lambda2.sats lambda2_tcheck.dats ; $(PATSCC) -o $@ -c lambda2_tcheck.dats
+
+lambda2_interp_dats.o : \
+lambda2.sats lambda2_interp.dats ; $(PATSCC) -o $@ -c lambda2_interp.dats
+
+######
+
+libxatsopt: ; \
+(cd $(XANADU); \
+ make -C srcgen/xats libxatsopt)
+libxatsopt_clean: ; \
+(cd $(XANADU); make -C srcgen/xats cleanall)
 
 ######
 

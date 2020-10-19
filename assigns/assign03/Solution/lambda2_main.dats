@@ -38,6 +38,7 @@ overload
 #dynload "./lambda2_term.dats"
 #dynload "./lambda2_senv.dats"
 #dynload "./lambda2_tcheck.dats"
+#dynload "./lambda2_interp.dats"
 
 (* ****** ****** *)
 //
@@ -1083,6 +1084,10 @@ val
 t0p0 = t0erm_tcheck0(t0m0)
 val () =
 println!("result: t0p0 = ", t0p0)
+val
+val0 = t0erm_interp0(t0m0)
+val () =
+println!("result: val0 = ", val0)
 //
 } (* end of [then] *)
 else

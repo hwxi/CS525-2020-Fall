@@ -8,26 +8,26 @@
 (* ****** ****** *)
 
 implement
-senv_extend
+s0env_extend
 (env, x0, tp) =
 let
 val+
-SENV(xts) = env
+S0ENV(xts) = env
 in
-SENV(mylist_cons((x0, tp), xts))
+S0ENV(mylist_cons((x0, tp), xts))
 end // end of [envir_extend]
 
 (* ****** ****** *)
 
 implement
-senv_search
-(senv, x0) =
+s0env_search
+(s0env, x0) =
 (
   auxlst(xts)
 ) where
 {
 val+
-SENV(xts) = senv
+S0ENV(xts) = s0env
 fun
 auxlst
 ( xts
@@ -36,14 +36,18 @@ auxlst
 ) : myoptn(type0) =
 (
 case+ xts of
-| mylist_nil() =>
-  myoptn_nil()
-| mylist_cons(xt1, xts) =>
-  if x0 = xt1.0
-  then myoptn_cons(xt1.1) else auxlst(xts)
+|
+mylist_nil() =>
+myoptn_nil()
+|
+mylist_cons(xt1, xts) =>
+if
+(x0 = xt1.0)
+then
+myoptn_cons(xt1.1) else auxlst(xts)
 )
-} (*where*) // end of [senv_search]
+} (*where*) // end of [s0env_search]
 
 (* ****** ****** *)
 
-(* end of [lambda2_senv.dats] *)
+(* end of [lambda2_s0env.dats] *)

@@ -11,14 +11,14 @@
 (* ****** ****** *)
 
 val
-senv_nil =
-SENV(mylist_nil())
+s0env_nil =
+S0ENV(mylist_nil())
 
 (* ****** ****** *)
 
 implement
 t0erm_tcheck0(prog) =
-t0erm_tcheck1(prog, senv_nil)
+t0erm_tcheck1(prog, s0env_nil)
 
 (* ****** ****** *)
 
@@ -43,7 +43,7 @@ T0Mstr(_) => T0Pstr
 T0Mvar(x0) =>
 let
 val
-opt = senv_search(senv, x0)
+opt = s0env_search(senv, x0)
 //
 in
 case- opt of myoptn_cons(tp) => tp
@@ -65,7 +65,7 @@ T0Mlam
 let
   val
   senv =
-  senv_extend
+  s0env_extend
   (senv, x0, tp1)
   val tp2 =
   t0erm_tcheck1(tm2, senv)
@@ -93,7 +93,7 @@ end where
 {
   val
   senv =
-  senv_extend
+  s0env_extend
   (senv, f0, tp1)
   val tp2 =
   t0erm_tcheck1(tm2, senv)
