@@ -2,7 +2,7 @@
 
 #define
 XANADU_targetloc
-"./../xanadu-2020-10-18"
+"./../../xanadu-2020-10-18"
 
 (* ****** ****** *)
 //

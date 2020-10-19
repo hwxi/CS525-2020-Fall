@@ -18,6 +18,10 @@ $extfcall
 UN = "prelude/SATS/unsafe.sats"
 //
 (* ****** ****** *)
+
+#staload "./../project.sats"
+
+(* ****** ****** *)
 //
 #include "./libxatsopt.hats"
 //
@@ -26,25 +30,9 @@ overload
 //
 (* ****** ****** *)
 //
-#staload "./../mylib/mylib.sats"
-#staload "./../mylib/mylib.dats"
+#staload "./../../mylib/mylib.sats"
+#staload "./../../mylib/mylib.dats"
 //
-(* ****** ****** *)
-
-#staload "./project.sats"
-
-(* ****** ****** *)
-(*
-#staload "./project_t0erm.dats"
-#staload "./project_t1erm.dats"
-#staload "./project_t2erm.dats"
-*)
-(* ****** ****** *)
-(*
-#dynload "./project_t0erm.dats"
-#dynload "./project_t1erm.dats"
-#dynload "./project_t2erm.dats"
-*)
 (* ****** ****** *)
 //
 extern

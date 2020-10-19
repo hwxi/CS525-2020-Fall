@@ -451,5 +451,5 @@ fprint!(out, "VALfix(", "...", ")")
 
 (* ****** ****** *)
 
-(* end of [lambda1_interp.dats] *)
+(* end of [lambda2_interp.dats] *)
 
