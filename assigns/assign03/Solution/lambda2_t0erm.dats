@@ -80,4 +80,4 @@ case+ tm of
 
 (* ****** ****** *)
 
-(* end of [lambda2_term.dats] *)
+(* end of [lambda2_t0erm.dats] *)

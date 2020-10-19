@@ -71,4 +71,4 @@ case+ tp of
 
 (* ****** ****** *)
 
-(* end of [lambda2_type.dats] *)
+(* end of [lambda2_type0.dats] *)

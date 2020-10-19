@@ -19,11 +19,11 @@ INCLUDE += -I$(XANADU)/srcgen/xats
 
 OBJECTS :=
 OBJECTS += \
-lambda2_type_dats.o
+lambda2_type0_dats.o
 OBJECTS += \
-lambda2_term_dats.o
+lambda2_t0erm_dats.o
 OBJECTS += \
-lambda2_senv_dats.o
+lambda2_s0env_dats.o
 OBJECTS += \
 lambda2_tcheck_dats.o
 OBJECTS += \
@@ -39,14 +39,14 @@ lambda2_main.dats $(OBJECTS) -L$(XANADU)/lib -lxatsopt -lgc
 
 ######
 
-lambda2_type_dats.o : \
-lambda2.sats lambda2_type.dats ; $(PATSCC) -o $@ -c lambda2_type.dats
+lambda2_type0_dats.o : \
+lambda2.sats lambda2_type0.dats ; $(PATSCC) -o $@ -c lambda2_type0.dats
 
-lambda2_term_dats.o : \
-lambda2.sats lambda2_term.dats ; $(PATSCC) -o $@ -c lambda2_term.dats
+lambda2_t0erm_dats.o : \
+lambda2.sats lambda2_t0erm.dats ; $(PATSCC) -o $@ -c lambda2_t0erm.dats
 
-lambda2_senv_dats.o : \
-lambda2.sats lambda2_senv.dats ; $(PATSCC) -o $@ -c lambda2_senv.dats
+lambda2_s0env_dats.o : \
+lambda2.sats lambda2_s0env.dats ; $(PATSCC) -o $@ -c lambda2_s0env.dats
 
 lambda2_tcheck_dats.o : \
 lambda2.sats lambda2_tcheck.dats ; $(PATSCC) -o $@ -c lambda2_tcheck.dats
@@ -60,6 +60,8 @@ libxatsopt: ; \
 (cd $(XANADU); \
  make -C srcgen/xats libxatsopt)
 libxatsopt_clean: ; \
+(cd $(XANADU); make -C srcgen/xats clean)
+libxatsopt_cleanall: ; \
 (cd $(XANADU); make -C srcgen/xats cleanall)
 
 ######

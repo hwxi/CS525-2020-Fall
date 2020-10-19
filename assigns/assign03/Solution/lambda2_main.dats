@@ -34,9 +34,9 @@ overload
 (* ****** ****** *)
 
 #staload "./lambda2.sats"
-#dynload "./lambda2_type.dats"
-#dynload "./lambda2_term.dats"
-#dynload "./lambda2_senv.dats"
+#dynload "./lambda2_type0.dats"
+#dynload "./lambda2_t0erm.dats"
+#dynload "./lambda2_s0env.dats"
 #dynload "./lambda2_tcheck.dats"
 #dynload "./lambda2_interp.dats"
 
