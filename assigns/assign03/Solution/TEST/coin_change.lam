@@ -30,34 +30,36 @@ coin_change =
 lam
 (sum: int): int =>
 let
-val
-aux =
-fix
-aux
-(sum: int):
-int -> int =>
-lam(n: int): int =>
-if
-(sum > 0)
-then
-(
-if n >= 0
-then
-( aux(sum)(n-1)
-+ aux
-  (sum-coin_get(n))(n)) else 0
-)
-else (if sum < 0 then 0 else 1)
-// end of [aux]
+  val
+  aux =
+  fix
+  aux
+  (sum: int):
+  int -> int =>
+  lam(n: int): int =>
+  if
+  (sum > 0)
+  then
+  (
+  if n >= 0
+  then
+  ( aux(sum)(n-1)
+  + aux
+    (sum-coin_get(n))(n)) else 0
+  )
+  else (if sum < 0 then 0 else 1)
+  // end of [aux]
 in
   aux(sum)(3(*ncoin*))
 end
 in
   coin_change(100)
 end // coin_change
+//
 end (* end of [ coin_get ] *)
+//
 end (* end of [ theCoins ] *)
 
 (* ****** ****** *)
 
-(* end of [coin-change.dats] *)
+(* end of [coin_change.dats] *)
