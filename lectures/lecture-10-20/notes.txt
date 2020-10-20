@@ -1,0 +1,10 @@
+Occurs-check is needed when we solve a
+constraint of the form X = T.
+
+Given X = X, we discard it because it does not
+provide useful information on X.
+
+Given X = T where T is not X, we need to check
+if X occurs in T; if X does, then report a type-error;
+otherwise, X is solved and its solution is T.
+

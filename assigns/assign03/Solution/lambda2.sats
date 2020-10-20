@@ -76,6 +76,9 @@ and t0erm =
   (t0var, type0, t0erm)
 | T0Mapp of (t0erm, t0erm)
 //
+| T0Mlet of
+  (t0var, t0erm, t0erm)
+//
 | T0Mfix1 of
   (t0var, type0, t0erm)
 //

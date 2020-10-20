@@ -85,6 +85,21 @@ let
   end
 //
 |
+T0Mlet
+(x0, tm1, tm2) =>
+let
+  val
+  tp1 =
+  tcheck1(tm1)
+  val
+  senv =
+  s0env_extend
+  (senv, x0, tp1)
+in
+  t0erm_tcheck1(tm2, senv)
+end
+//
+|
 T0Mfix1
 (f0, tp1, tm2) =>
 let
