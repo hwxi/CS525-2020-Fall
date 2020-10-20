@@ -32,6 +32,12 @@ tcheck1
 (tm: t0erm): type0 =
 t0erm_tcheck1(tm, senv)
 //
+(*
+val () =
+println!
+("t0erm_tcheck1: tm0 = ", tm0)
+*)
+//
 in
 case- tm0 of
 |
@@ -114,6 +120,24 @@ end where
   t0erm_tcheck1(tm2, senv)
 }
 //
+|
+T0Mopr1
+(opr, tm1) =>
+let
+val tp1 = tcheck1(tm1)
+in
+case- opr of
+|
+"!" =>
+let
+val-true= (T0Pbtf=tp1) in T0Pbtf
+end
+|
+"-" =>
+let
+val-true= (T0Pint=tp1) in T0Pint
+end
+end // end of [T0Mopr1]
 |
 T0Mopr2
 (opr, tm1, tm2) =>

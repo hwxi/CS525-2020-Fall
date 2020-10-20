@@ -142,6 +142,32 @@ end // end of [aux_app]
 (* ****** ****** *)
 
 fun
+aux_let
+( t0m0: t0erm
+, env0: d0env): value =
+let
+//
+val-
+T0Mlet
+( x0
+, t0m1, t0m2) = t0m0
+val
+vbnd =
+t0erm_interp1(t0m1, env0)
+in
+let
+  val
+  env1 =
+  d0env_extend
+  (env0, x0, vbnd)
+in
+t0erm_interp1(t0m2, env1)
+end
+end // end of [aux_let]
+
+(* ****** ****** *)
+
+fun
 aux_tup
 ( t0m0: t0erm
 , env0: d0env): value =
@@ -178,7 +204,7 @@ aux_snd
 , env0: d0env): value =
 let
 val-
-T0Mfst(tup1) = t0m0
+T0Msnd(tup1) = t0m0
 val-
 VALtup(_, v2) =
 t0erm_interp1(tup1, env0) in v2 end
@@ -346,7 +372,14 @@ in (* in-of-local *)
 implement
 t0erm_interp1
 (t0m0, env0) =
-(
+let
+(*
+val () =
+println!
+("t0erm_interp1: t0m0 = ", t0m0)
+*)
+in
+//
 case+ t0m0 of
 //
 | T0Mnil() =>
@@ -366,10 +399,13 @@ case+ t0m0 of
 | T0Mapp _ =>
   aux_app(t0m0, env0)
 //
+| T0Mlet _ =>
+  aux_let(t0m0, env0)
+//
 | T0Mfst _ =>
   aux_fst(t0m0, env0)
 | T0Msnd _ =>
-  aux_fst(t0m0, env0)
+  aux_snd(t0m0, env0)
 | T0Mtup _ =>
   aux_tup(t0m0, env0)
 //
@@ -408,7 +444,7 @@ val () = assertloc(false) in exit(1)
 end
 end // end of [ rest-of-t0erm ]
 *)
-)
+end // end of [let]
 
 end // end of [local]
 

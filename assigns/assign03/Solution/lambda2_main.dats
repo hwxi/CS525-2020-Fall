@@ -520,6 +520,8 @@ case+ d1es of
 //
 } (* end of [auxlist] *)
 
+(* ****** ****** *)
+
 fun
 auxif0
 ( d1e0
@@ -545,6 +547,87 @@ T0Mcond(t0m1, t0m2, opt3)
   opt3 = d1exp2t0erm_opt(opt3)
 }
 end // end of [auxif0]
+
+(* ****** ****** *)
+
+fun
+auxlet
+( d1e0
+: d1exp): t0erm =
+let
+//
+val-
+D1Elet
+( d1cs
+, body) = d1e0.node()
+//
+val d1c1 =
+( case- d1cs of
+| list_cons(d1c1, _) => d1c1
+) : d1ecl // end of [val]
+//
+val v1d1 =
+let
+val v1ds =
+(
+case-
+d1c1.node() of
+|
+D1Cvaldecl
+(_, _, v1ds) => v1ds
+) : v1aldeclist
+in
+case- v1ds of
+| list_cons(v1d1, _) => v1d1
+end : v1aldecl // end-of-val
+//
+val+
+V1ALDECL(rcd) = v1d1
+//
+val x0 =
+let
+val
+d1p = rcd.pat
+in
+case-
+d1p.node() of
+|
+D1Pid0(tok) =>
+(
+case-
+tok.node() of
+|
+T_IDENT_alp(nam) => nam
+)
+end : t0var // end-of-val
+//
+val def =
+(
+case-
+rcd.def of
+| None() =>
+  T0Mnil()
+| Some(d1e) =>
+  d1exp2t0erm(d1e)): t0erm
+//
+in
+let
+val
+body =
+(
+case-
+body of
+|
+list_cons
+(d1e, _) =>
+d1exp2t0erm(d1e)
+) : t0erm // end-of-val
+in
+  T0Mlet(x0, def, body)
+end
+end // end of [aux_let]
+
+(* ****** ****** *)
 
 fun
 auxlam
@@ -638,6 +721,43 @@ end // end of [auxfix]
 
 fun
 auxapp1
+(d1e0: d1exp): t0erm =
+let
+//
+val-
+D1Eapp1
+( d1e1
+, d1e2) = d1e0.node()
+//
+in
+case+
+d1e1.node() of
+|
+D1Edtsel
+(lab, _) => let
+//
+val nsel =
+let
+val opt =
+$LAB.label_get_int(lab)
+in
+case+ opt of
+| ~None_vt() => 0
+| ~Some_vt(n) => n
+end : int // end-of-val
+in
+if nsel <= 0
+then
+T0Mfst(d1exp2t0erm(d1e2))
+else
+T0Msnd(d1exp2t0erm(d1e2))
+end
+|
+_ (*else*) => auxapp1_else(d1e0)
+end
+
+and
+auxapp1_else
 (d1e0: d1exp): t0erm =
 let
 //
@@ -768,6 +888,9 @@ D1Elist
 |
 D1Eif0 _ => auxif0(d1e0)
 |
+D1Elet _ => auxlet(d1e0)
+//
+|
 D1Elam _ => auxlam(d1e0)
 |
 D1Efix _ => auxfix(d1e0)
@@ -779,6 +902,17 @@ D1Eapp2 _ => auxapp2(d1e0)
 //
 |
 D1Eanno _ => auxanno(d1e0)
+//
+| _ =>
+(
+  exit(1)
+) where
+{
+val () =
+println!
+("d1exp2t0erm: d1e0 = ", d1e0)
+val ((*crash*)) = assertloc(false)
+}
 //
 end // end of [d1exp2t0erm]
 

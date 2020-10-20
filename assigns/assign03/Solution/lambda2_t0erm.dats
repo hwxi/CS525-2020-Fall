@@ -45,6 +45,11 @@ case+ tm of
 | T0Mapp(tm1, tm2) =>
   fprint!(out, "T0Mapp(", tm1, "; ", tm2, ")")
 //
+| T0Mlet(x0, tm1, tm2) =>
+  fprint!
+  ( out
+  , "T0Mlet(", x0, "; ", tm1, "; ", tm2, ")")
+//
 | T0Mfix1(f0, tp1, tm2) =>
   fprint!
   ( out
