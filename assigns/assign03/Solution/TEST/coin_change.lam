@@ -62,4 +62,4 @@ end (* end of [ theCoins ] *)
 
 (* ****** ****** *)
 
-(* end of [coin_change.dats] *)
+(* end of [coin_change.lam] *)
