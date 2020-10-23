@@ -148,5 +148,12 @@ case+ xs of
 }
 
 (* ****** ****** *)
+//
+implement
+{a}//tmp
+ref_equal(r1, r2) =
+(ref_get_ptr(r1) = ref_get_ptr(r2))
+//
+(* ****** ****** *)
 
 (* end of [mylib.dats] *)

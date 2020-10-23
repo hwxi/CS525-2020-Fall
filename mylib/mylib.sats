@@ -102,4 +102,11 @@ mylist_map
 
 (* ****** ****** *)
 
+fun
+{a:t@ype}
+ref_equal
+(ref1: ref(a), ref2: ref(a)): bool
+
+(* ****** ****** *)
+
 (* end of [mylib.sats] *)
