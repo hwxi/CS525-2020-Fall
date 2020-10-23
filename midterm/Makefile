@@ -8,7 +8,7 @@ PATSCC=$(PATSHOME)/bin/patscc
 
 ######
 XANADU=\
-"./../../../xanadu-2020-10-18"
+"./../xanadu-2020-10-18"
 ######
 CFLAGS :=
 CFLAGS += -DATS_MEMALLOC_GCBDW
