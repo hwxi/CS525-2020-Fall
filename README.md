@@ -1,6 +1,12 @@
 # CS525-2020-Fall
 For teaching BU CAS CS 525: Compiler Design and Implementation.
 
+## Build Status
+
+* [![Build Status](https://travis-ci.org/hwxi/CS525-2020-Fall.svg?branch=master)](https://travis-ci.org/hwxi/CS525-2020-Fall) Ubuntu
+
+## Mirroring this repository
+
 Please create a private repository that mirrors this one and update
 frequently.
 
