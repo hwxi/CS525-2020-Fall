@@ -1,6 +1,6 @@
 fun main() =
 (
 let
-val f = lam(n): int => 0
-in 1 end
+val f = lam(n): int => 0 in (0 = 0)
+end
 )

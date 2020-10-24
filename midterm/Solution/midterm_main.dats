@@ -870,11 +870,11 @@ d1exp2t0erm
   (d1e0) =
 let
 //
-(*
+// (*
 val () =
 println!
 ("d1exp2t0erm: d1e0 = ", d1e0)
-*)
+// *)
 //
 in
 //
@@ -1283,7 +1283,7 @@ let
 //
 val
 XATSHOME =
-"./../../../xanadu-2020-10-18"
+"./../../xanadu-2020-10-18"
 //
 val
 ((*void*)) = the_fixity_load(XATSHOME)
