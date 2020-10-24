@@ -1,0 +1,47 @@
+---
+os:
+  - linux
+
+language: c
+
+node_js:
+  - "5.10.1"
+
+env:
+  - export NODE_VERSION="5.10.1"
+
+addons:
+  apt:
+    packages:
+      - libgc-dev
+      - libgmp-dev
+
+before_install:
+  - date
+  - export PATSHOME=${HOME}/ATS2
+  - export PATH=${PATH}:${PATSHOME}/bin
+  - export REPOHOME=${TRAVIS_BUILD_DIR}
+  - export XATSHOME=${REPOHOME}/xanadu-2020-10-18/.
+  - export GCC=gcc
+  - export CLANG=clang
+
+install:
+  - ${REPOHOME}/travis-ci/install-ats2.sh 0.4.2
+
+after_install:
+  - date
+
+before_script:
+  - date
+
+script:
+  # Building ATS2
+  - cd ${PATSHOME}
+  - ./configure&&make CC=${GCC} all
+  # Building Xanadu
+  - cd ${REPOHOME}
+  - (cd assigns/assign02/Solution && make lambda1)
+  - (cd assigns/assign03/Solution && make lambda2)
+
+after_script:
+  - date
