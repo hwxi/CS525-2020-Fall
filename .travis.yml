@@ -42,8 +42,14 @@ script:
   # Building Xanadu
   - cd ${REPOHOME}
   - (cd $XATSHOME/srcgen/xats && make libxatsopt)
+  - (cd midterm/Solution && make midterm)
+  - (cd midterm/Solution && ./midterm TEST/test01.lam)
+  - (cd midterm/Solution && ./midterm TEST/test02.lam)
   - (cd assigns/assign02/Solution && make lambda1)
   - (cd assigns/assign03/Solution && make lambda2)
+  - (cd assigns/assign03/Solution && ./lambda2 TEST/fact.lam)
+  - (cd assigns/assign03/Solution && ./lambda2 TEST/fibo.lam)
+  - (cd assigns/assign03/Solution && ./lambda2 TEST/coin_change.lam)  
 
 after_script:
   - date
