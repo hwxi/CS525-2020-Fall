@@ -870,11 +870,11 @@ d1exp2t0erm
   (d1e0) =
 let
 //
-// (*
+(*
 val () =
 println!
 ("d1exp2t0erm: d1e0 = ", d1e0)
-// *)
+*)
 //
 in
 //
