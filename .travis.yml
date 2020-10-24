@@ -21,7 +21,8 @@ before_install:
   - export PATSHOME=${HOME}/ATS2
   - export PATH=${PATH}:${PATSHOME}/bin
   - export REPOHOME=${TRAVIS_BUILD_DIR}
-  - export XATSHOME=${REPOHOME}/xanadu-2020-10-18/.
+  - export XANADU=xanadu-2020-10-18
+  - export XATSHOME=${REPOHOME}/${XANADU}/.
   - export GCC=gcc
   - export CLANG=clang
 
@@ -40,6 +41,7 @@ script:
   - ./configure&&make CC=${GCC} all
   # Building Xanadu
   - cd ${REPOHOME}
+  - (cd $XATSHOME/srcgen/xats && make libxatsopt)
   - (cd assigns/assign02/Solution && make lambda1)
   - (cd assigns/assign03/Solution && make lambda2)
 
