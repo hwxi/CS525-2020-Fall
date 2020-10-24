@@ -53,7 +53,16 @@ in
   aux(sum)(3(*ncoin*))
 end
 in
-  coin_change(100)
+  let
+  val _ =
+  print
+  ("coin_change(100) = ")
+  in
+  let
+  val _ =
+  print(coin_change(100)) in print("\n")
+  end
+  end
 end // coin_change
 //
 end (* end of [ coin_get ] *)

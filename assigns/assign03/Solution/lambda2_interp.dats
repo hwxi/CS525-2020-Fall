@@ -275,6 +275,23 @@ case- v1 of
 | VALbtf(b1) => VALbtf(~b1)
 )
 //
+| "print" =>
+(
+case- v1 of
+| VALint(i1) =>
+  let
+  val () = print(i1) in VALnil()
+  end
+| VALbtf(b1) =>
+  let
+  val () = print(b1) in VALnil()
+  end
+| VALstr(s1) =>
+  let
+  val () = print(s1) in VALnil()
+  end
+)
+//
 | _ (* else *) =>
 let
 val () = assertloc(false) in exit(1)

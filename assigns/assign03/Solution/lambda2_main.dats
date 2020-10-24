@@ -45,9 +45,69 @@ overload
 extern
 fun
 xatsopt_strunq
-( source // "<string>" -> <string>
-: string)
-: string = "ext#xatsopt_strunq"
+( source
+: string
+)
+: string =
+"ext#xatsopt_strunq"
+//
+//
+extern
+fun
+strunqize
+(source: string): string
+//
+implement
+strunqize(cs) = let
+//
+val cs =
+xatsopt_strunq(cs)
+val cs =
+streamize_string_char<>(cs)
+//
+vtypedef
+cstream = stream_vt(charNZ)
+//
+fun
+auxmain
+(cs: cstream): cstream = $ldelay
+(
+case+ !cs of
+| ~
+stream_vt_nil() =>
+stream_vt_nil()
+| ~
+stream_vt_cons(c0, cs) =>
+(
+if
+(c0 != '\\')
+then
+stream_vt_cons(c0, auxmain(cs))
+else
+(
+case- !cs of
+| ~
+stream_vt_cons(c1, cs) =>
+let
+val c1 =
+(
+case+ c1 of
+| 'n' => '\n'
+| 't' => '\t'
+| _ (* else *) => c1
+) : charNZ // end-of-val
+in
+stream_vt_cons(c1, auxmain(cs))
+end
+)
+)
+, lazy_vt_free(cs)
+)
+//
+in
+strptr2string
+(string_make_stream_vt(auxmain(cs)))
+end // end of [strunqize]
 //
 (* ****** ****** *)
 //
@@ -464,7 +524,8 @@ D1Eint(tok) =>
 case-
 tok.node() of
 |
-T_INT1(rep) => T0Mint(g0string2int(rep))
+T_INT1(rep) =>
+  T0Mint(g0string2int(rep))
 )
 )
 
@@ -481,7 +542,8 @@ D1Estr(tok) =>
 case-
 tok.node() of
 |
-T_STRING_closed(rep) => T0Mstr(xatsopt_strunq(rep))
+T_STRING_closed
+  (rep) => T0Mstr(strunqize(rep))
 )
 )
 

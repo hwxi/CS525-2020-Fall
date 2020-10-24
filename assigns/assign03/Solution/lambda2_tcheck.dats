@@ -137,6 +137,19 @@ end
 let
 val-true= (T0Pint=tp1) in T0Pint
 end
+//
+|
+"print" =>
+(
+case- tp1 of
+| T0Pbas(nm1)
+  when nm1 = "int" => T0Pnil
+| T0Pbas(nm1)
+  when nm1 = "bool" => T0Pnil
+| T0Pbas(nm1)
+  when nm1 = "string" => T0Pnil
+)
+//
 end // end of [T0Mopr1]
 |
 T0Mopr2
