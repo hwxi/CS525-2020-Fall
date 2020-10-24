@@ -27,18 +27,20 @@ overload
 (* ****** ****** *)
 //
 #staload
-"./../../../mylib/mylib.sats"
+"./../../mylib/mylib.sats"
 #staload
-"./../../../mylib/mylib.dats"
+"./../../mylib/mylib.dats"
 //
 (* ****** ****** *)
 
-#staload "./lambda2.sats"
-#dynload "./lambda2_type0.dats"
-#dynload "./lambda2_t0erm.dats"
-#dynload "./lambda2_s0env.dats"
-#dynload "./lambda2_tcheck.dats"
-#dynload "./lambda2_interp.dats"
+#staload "./../midterm.sats"
+#dynload "./midterm_type0.dats"
+#dynload "./midterm_t0erm.dats"
+(*
+#dynload "./midterm_s0env.dats"
+#dynload "./midterm_tinfer.dats"
+#dynload "./midterm_interp.dats"
+*)
 
 (* ****** ****** *)
 //
@@ -635,9 +637,11 @@ auxlam
 : d1exp): t0erm =
 let
 //
+(*
 val () =
 println!
 ("auxlam: d1e0 = ", d1e0)
+*)
 //
 val-
 D1Elam
@@ -654,22 +658,12 @@ val body = d1exp2t0erm(body)
 in
 case+ res0 of
 | EFFS1EXPnone() =>
-  let
-  val-
-  myoptn_cons
-  (targ) = topt
-  in
-  T0Mlam(farg, targ, body)
-  end
+  (
+    T0Mlam(farg, topt, body)
+  )
 | EFFS1EXPsome(s1e0) =>
   (
-  let
-  val-
-  myoptn_cons
-  (targ) = topt
-  in
-  T0Mlam(farg, targ, body)
-  end
+    T0Mlam(farg, topt, body)
   ) where
   {
     val tres = s1exp2type0(s1e0)
@@ -684,7 +678,7 @@ auxfix
 let
 val-
 D1Efix
-( tfix
+( tok0
 , fid0
 , f1as
 , res0
@@ -707,19 +701,28 @@ case- res0 of
 |
 EFFS1EXPsome(s1e0) =>
 (
-  T0Mfix1
-  ( idf
-  , tfix
-  , T0Mlam(farg, targ, body))
+T0Mfix1
+( idf
+, tfix
+, T0Mlam(farg, topt, body))
 ) where
 {
-  val targ =
+  val tres =
+  s1exp2type0(s1e0)
+  val tfix =
   (
-  case- topt of
-  | myoptn_cons(targ) => targ
-  ) : type0 // end-of-val
-  val tres = s1exp2type0(s1e0)
-  val tfix = T0Pfun(targ, tres)
+  case+ topt of
+  | myoptn_nil() =>
+    myoptn_nil()
+  | myoptn_cons(targ) =>
+    myoptn_cons(T0Pfun(targ, tres))
+  ) : type0opt // end-of-val
+  val body =
+  (
+    case+ topt of
+    | myoptn_nil() => body
+    | myoptn_cons _ => T0Manno(body, tres)
+  )
 }
 end // end of [auxfix]
 
@@ -1008,22 +1011,31 @@ in
 val fdef =
 (
 case- rcd.res of
-| EFFS1EXPsome(s1e0) =>
+|
+EFFS1EXPsome(s1e0) =>
+(
+T0Mfix1
+( idf
+, tfix
+, T0Mlam(farg, topt, body))
+) where
+{
+  val tres = s1exp2type0(s1e0)
+  val tfix =
   (
-  T0Mfix1
-  ( idf
-  , tfix
-  , T0Mlam(farg, targ, body))
-  ) where
-  {
-    val targ =
-    (
-    case- topt of
-    | myoptn_cons(targ) => targ
-    ) : type0 // end-of-val
-    val tres = s1exp2type0(s1e0)
-    val tfix = T0Pfun(targ, tres)
-  }
+  case+ topt of
+  | myoptn_nil() =>
+    myoptn_nil()
+  | myoptn_cons(targ) =>
+    myoptn_cons(T0Pfun(targ, tres))
+  ) : type0opt // end-of-val
+  val body =
+  (
+    case+ topt of
+    | myoptn_nil() => body
+    | myoptn_cons _ => T0Manno(body, tres)
+  )
+}
 ) : t0erm // end-of-val
 }
 end // end of [auxf1d0]
@@ -1219,14 +1231,18 @@ myoptn_cons(t0m0) = mopt
 val () =
 println!("input: t0m0 = ", t0m0)
 //
+(*
 val
-t0p0 = t0erm_tcheck0(t0m0)
+t0p0 = t0erm_tinfer0(t0m0)
 val () =
 println!("result: t0p0 = ", t0p0)
+*)
+(*
 val
 val0 = t0erm_interp0(t0m0)
 val () =
 println!("result: val0 = ", val0)
+*)
 //
 } (* end of [then] *)
 else
@@ -1282,4 +1298,4 @@ end // end of [local]
 
 (* ****** ****** *)
 
-(* end of [lambda2_main.dats] *)
+(* end of [midterm_main.dats] *)

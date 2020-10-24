@@ -1,0 +1,6 @@
+fun main() =
+(
+let
+val f = lam(n): int => 0
+in 1 end
+)
