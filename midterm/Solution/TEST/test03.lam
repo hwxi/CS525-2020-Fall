@@ -1,0 +1,28 @@
+(*
+// This one is by Shlomi Hod
+// It should type-check and its value is 3
+*)
+fun main() =
+(
+  let
+      val arr = (1, 2)
+  in
+      let
+          val sum = lam(x) => x.0 + x.1
+      in
+          let
+              val apply = lam(x) => (x.0)(x.1)
+          in
+              let
+                  val args = (sum, arr)
+              in
+                  apply(args)
+              end
+          end
+      end
+  end
+)
+
+(* ****** ****** *)
+
+(* end of [test03.lam] *)
