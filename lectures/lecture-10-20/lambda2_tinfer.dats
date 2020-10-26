@@ -81,7 +81,15 @@ T0Mapp(tm1, tm2) =>
 let
   val tp1 = tinfer1(tm1)
   val tp2 = tinfer1(tm2)
-  val-T0Pfun(targ, tres) = tp1 // tm1 should be a function!
+//
+// tm1 should be a function!
+//
+  val-true = tunify
+  ( tp1
+  , T0Pfun
+    (tpext_new(), tpext_new())
+  )
+  val-T0Pfun(targ, tres) = tp1
   val-true = tunify(targ, tp2)
   in
     tres

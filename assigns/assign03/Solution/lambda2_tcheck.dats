@@ -85,6 +85,14 @@ let
   val tp1 = tcheck1(tm1)
   val tp2 = tcheck1(tm2)
   val-T0Pfun(targ, tres) = tp1 // tm1 should be a function!
+//
+  val () =
+  println!
+  ("t0erm_tcheck1: tp1 = ", tp1)
+  val () =
+  println!
+  ("t0erm_tcheck1: tp2 = ", tp2)
+//
   val-true = eq_type0_type0(targ, tp2)
   in
     tres

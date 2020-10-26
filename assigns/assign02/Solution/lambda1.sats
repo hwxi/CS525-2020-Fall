@@ -42,11 +42,11 @@ where t0ermlst = mylist(t0erm)
 (* ****** ****** *)
 fun
 print_t0erm
-(xs: t0erm): void
+(t0: t0erm): void
 overload print with print_t0erm
 fun
 fprint_t0erm
-(out: FILEref, xs: t0erm): void
+(out: FILEref, t0: t0erm): void
 overload fprint with fprint_t0erm
 (* ****** ****** *)
 
