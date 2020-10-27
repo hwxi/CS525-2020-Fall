@@ -46,75 +46,196 @@ overload
 //
 extern
 fun
-xatsopt_strunq
-( source
-: string
-)
-: string =
-"ext#xatsopt_strunq"
-//
-//
-extern
-fun
 strunqize
-(source: string): string
+(src: string): string
 //
 implement
-strunqize(cs) = let
+strunqize(src) =
+let
 //
-val cs =
-xatsopt_strunq(cs)
-val cs =
-streamize_string_char<>(cs)
+#define OCT 8
+#define CNUL '\000'
 //
-vtypedef
-cstream = stream_vt(charNZ)
+val p0 = string2ptr(src)
+val n0 = g1ofg0(length(src))
+val () = assertloc(n0 >= 2)
+val p1 = ptr0_succ<char>(p0)
+//
+fun
+isBS
+( c0
+: char
+)
+: bool = (c0 = '\\')
 //
 fun
 auxmain
-(cs: cstream): cstream = $ldelay
-(
-case+ !cs of
-| ~
-stream_vt_nil() =>
-stream_vt_nil()
-| ~
-stream_vt_cons(c0, cs) =>
-(
+( q0: ptr
+, p1: ptr
+, ln: Nat): void =
 if
-(c0 != '\\')
+(ln <= 0)
 then
-stream_vt_cons(c0, auxmain(cs))
-else
 (
-case- !cs of
-| ~
-stream_vt_cons(c1, cs) =>
-let
+auxfini(q0)
+)
+else let
+//
 val c1 =
-(
-case+ c1 of
-| '"' => '"'
-| 'n' => '\n'
-| 'r' => '\r'
-| 't' => '\t'
-| 'b' => '\b'
-| 'f' => '\f'
-| 'v' => '\v'
-| '\\' => '\\'
-| _ (* else *) => c1
-) : charNZ // end-of-val
-in
-stream_vt_cons(c1, auxmain(cs))
-end
-)
-)
-, lazy_vt_free(cs)
-)
+$UN.ptr0_get<char>(p1)
 //
 in
-strptr2string
-(string_make_stream_vt(auxmain(cs)))
+ifcase
+|
+isBS(c1) =>
+let
+val p1 =
+ptr0_succ<char>(p1)
+in
+auxisbs(q0, p1, ln-1)
+end
+|
+_(* else *) =>
+let
+val () =
+$UN.ptr0_set<char>(q0, c1)
+in
+let
+  val p1 =
+  ptr0_succ<char>(p1)
+  val q0 =
+  ptr0_succ<char>(q0)
+in
+  auxmain(q0, p1, ln-1)
+end
+end
+// end of [ifcase]
+end // if-else // auxmain
+//
+and
+auxisbs
+( q0: ptr
+, p1: ptr
+, ln: Nat): void =
+let
+//
+val () =
+assertloc(ln >= 1)
+//
+val c1 =
+$UN.ptr0_get<char>(p1)
+fun
+auxescp
+(c1: char): void =
+let
+val () =
+$UN.ptr0_set<char>(q0, c1)
+val p1=ptr0_succ<char>(p1)
+val q0=ptr0_succ<char>(q0)
+in
+  auxmain(q0, p1, ln-1)
+end
+in
+case+ c1 of
+//
+| '"' => auxescp('"')
+//
+| 'a' => auxescp('\a')
+| 'b' => auxescp('\b')
+| 'f' => auxescp('\f')
+| 'n' => auxescp('\n')
+| 'r' => auxescp('\r')
+| 't' => auxescp('\t')
+| 'v' => auxescp('\v')
+| '\'' => auxescp('\'')
+| '\\' => auxescp('\\')
+//
+| _(*else*) =>
+(
+  auxisds
+  (q0, p1, ln, 3(*nd*), 0(*ds*))
+)
+//
+end // end of [auxisbs]
+//
+and
+auxisds
+( q0: ptr
+, p1: ptr
+, ln: Nat
+, nd: int
+, ds: int): void =
+if
+(ln <= 0)
+then
+let
+val cc = int2char0(ds)
+val () =
+$UN.ptr0_set<char>(q0, cc)
+in
+  auxfini
+  (ptr0_succ<char>(q0))
+end
+else
+(
+if
+(nd <= 0)
+then
+let
+val cc = int2char0(ds)
+val () =
+$UN.ptr0_set<char>(q0, cc)
+val q0=ptr0_succ<char>(q0)
+in
+  auxmain( q0, p1, ln )
+end
+else
+let
+val c1 =
+$UN.ptr0_get<char>(p1)
+in
+if
+isdigit(c1)
+then
+let
+val d1 = c1 - '0'
+val ds = OCT*ds+d1
+val p1 =
+ptr0_succ<char>(p1)
+in
+auxisds
+(q0, p1, ln-1, nd-1, ds)
+end
+else
+let
+val cc = int2char0(ds)
+val () =
+$UN.ptr0_set<char>(q0, cc)
+val q0=ptr0_succ<char>(q0)
+in
+  auxmain( q0, p1, ln )
+end
+end // else
+) (* if-else *) // auxisds
+//
+and
+auxfini
+( q0: ptr): void =
+(
+$UN.ptr0_set<char>(q0, CNUL)
+)
+//
+val
+( pf0
+, fpf | q0) = malloc_gc(n0-1)
+//
+in
+let
+  val () =
+  auxmain(q0, p1, sz2i(n0)-2)
+in
+  $UN.castvwtp0((pf0, fpf | q0))
+end
 end // end of [strunqize]
 //
 (* ****** ****** *)
