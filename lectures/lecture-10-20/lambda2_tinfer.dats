@@ -112,4 +112,4 @@ end // end of [let]
 
 (* ****** ****** *)
 
-(* end of [lambda2_typeck.dats] *)
+(* end of [lambda2_tinfer.dats] *)

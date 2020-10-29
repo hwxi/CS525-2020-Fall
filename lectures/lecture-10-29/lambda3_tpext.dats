@@ -1,10 +1,15 @@
 (* ****** ****** *)
-staload "./lambda2.sats"
-#staload
-"./../../mylib/mylib.sats"
+#staload "./lambda3.sats"
 (* ****** ****** *)
-#include
-"share/atspre_staload.hats"
+#staload "./../../mylib/mylib.sats"
+(* ****** ****** *)
+#include "share/atspre_staload.hats"
+(* ****** ****** *)
+
+implement
+print_tpext(X0) =
+fprint_tpext(stdout_ref, X0)
+
 (* ****** ****** *)
 
 absimpl
@@ -26,4 +31,4 @@ T0Pext(ref<topt0>(myoptn_nil()))
 
 (* ****** ****** *)
 
-(* end of [lambda2_tpext.dats] *)
+(* end of [lambda3_tpext.dats] *)

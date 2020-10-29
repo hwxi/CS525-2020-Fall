@@ -1,5 +1,5 @@
 (* ****** ****** *)
-#staload "./lambda2.sats"
+#staload "./lambda3.sats"
 (* ****** ****** *)
 #staload "./../../mylib/mylib.sats"
 (* ****** ****** *)
@@ -24,4 +24,4 @@ case- tm of
 
 (* ****** ****** *)
 
-(* end of [lambda2_t0erm.dats] *)
+(* end of [lambda3_t0erm.dats] *)
