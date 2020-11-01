@@ -10,8 +10,11 @@
 "./../../mylib/mylib.dats"
 (* ****** ****** *)
 
+#dynload "./lambda3_stamp.dats"
 #dynload "./lambda3_type0.dats"
 #dynload "./lambda3_t0erm.dats"
+#dynload "./lambda3_tpext.dats"
+#dynload "./lambda3_type1.dats"
 #dynload "./lambda3_t1var.dats"
 #dynload "./lambda3_t1erm.dats"
 

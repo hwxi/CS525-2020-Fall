@@ -181,16 +181,54 @@ fun type1_new_ext(): type1
 fun type1_new_tup(): type1
 
 (* ****** ****** *)
+fun
+print_type1
+(xs: type1): void
+overload print with print_type1
+fun
+fprint_type1
+(out: FILEref, xs: type1): void
+overload fprint with fprint_type1
+(* ****** ****** *)
+//
+typedef
+t1opt = myoptn(type1)
 //
 fun
 tpext_get:
-tpext -> type1
+tpext -> t1opt
 fun
 tpext_set
 (tpext, def: type1): void
 //
 overload .get with tpext_get
 overload .set with tpext_set
+//
+(* ****** ****** *)
+
+abstflt
+stamp_type = int
+typedef
+stamp = stamp_type
+abstbox
+stamper_type = ptr
+typedef
+stamper = stamper_type
+
+(* ****** ****** *)
+fun
+stamper_make(): stamper
+fun
+stamper_stamp(stamper): stamp
+(* ****** ****** *)
+//
+fun
+print_stamp(stamp): void
+fun
+fprint_stamp(FILEref, stamp): void
+//
+overload print with print_stamp
+overload fprint with fprint_stamp
 //
 (* ****** ****** *)
 

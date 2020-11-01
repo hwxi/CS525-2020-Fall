@@ -6,6 +6,19 @@
 #include "share/atspre_staload.hats"
 (* ****** ****** *)
 
+local
+val
+stamper = stamper_make()
+in
+fun
+tpext_stamp() =
+(
+  stamper_stamp(stamper)
+)
+end // end of [local]
+
+(* ****** ****** *)
+
 implement
 print_tpext(X0) =
 fprint_tpext(stdout_ref, X0)
@@ -13,21 +26,61 @@ fprint_tpext(stdout_ref, X0)
 (* ****** ****** *)
 
 absimpl
-tpext_type = ref(myoptn(type0))
+tpext_type = $rec
+{
+tpext_stamp= stamp
+,
+tpext_value= ref(t1opt)
+}
 
 (* ****** ****** *)
 
 implement
-tpext_get(X) = X[]
+tpext_get(X) =
+let
+val r =
+X.tpext_value in r[]
+end
 implement
 tpext_set(X, tp) =
-(X[] := myoptn_cons(tp))
+let
+val r = X.tpext_value
+in
+(r[] := myoptn_cons(tp))
+end
 
 (* ****** ****** *)
 
 implement
-tpext_new() =
-T0Pext(ref<topt0>(myoptn_nil()))
+tpext_new() = $rec
+{
+tpext_stamp= stamp
+,
+tpext_value=
+ref<t1opt>(myoptn_nil())
+} where
+{
+  val stamp = tpext_stamp()
+}
+
+(* ****** ****** *)
+
+implement
+fprint_tpext
+(out, X) =
+let
+val r = X.tpext_value
+val s = X.tpext_stamp
+in
+case+ r[] of
+|
+myoptn_nil() =>
+fprint!(out, "X(", s, ")[", "]")
+|
+myoptn_cons(def) =>
+fprint!(out, "X(", s, ")[", def, "]")
+end
+
 
 (* ****** ****** *)
 
