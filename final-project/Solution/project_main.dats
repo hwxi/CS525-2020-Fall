@@ -19,7 +19,17 @@ UN = "prelude/SATS/unsafe.sats"
 //
 (* ****** ****** *)
 
-#staload "./../project.sats"
+#staload "./project.sats"
+
+(* ****** ****** *)
+
+#dynload "./project_stamp.dats"
+#dynload "./project_type0.dats"
+#dynload "./project_t0erm.dats"
+#dynload "./project_tpext.dats"
+#dynload "./project_type1.dats"
+#dynload "./project_t1var.dats"
+#dynload "./project_t1erm.dats"
 
 (* ****** ****** *)
 //
@@ -67,7 +77,7 @@ fun
 T0Mseqn
 ( t0m1: t0erm
 , t0m2: t0erm): t0erm =
-T0Mlets
+T0Mlet
 (
 mylist_sing(T0DCL("_", t0m1)), t0m2
 )
@@ -298,7 +308,7 @@ local
 fun
 auxarg
 ( f1as
-: f1arglst): x0nam =
+: f1arglst): t0var =
 let
 val-
 list_cons
@@ -311,7 +321,7 @@ F1ARGsome_dyn(d1p) => auxd1p(d1p)
 end // end of [auxarg]
 and
 auxd1p
-(d1p0: d1pat): x0nam =
+(d1p0: d1pat): t0var =
 (
 case-
 d1p0.node() of
@@ -375,9 +385,9 @@ _(*non-D1Panno*) => myoptn_nil()
 in
 
 fun
-f1as2x0nam
+f1as2t0var
 ( f1as
-: f1arglst): x0nam = auxarg(f1as)
+: f1arglst): t0var = auxarg(f1as)
 fun
 f1as2type0
 ( f1as
@@ -432,7 +442,7 @@ fun
 auxopr
 ( d1e0
 : d1exp)
-: Option(opnam) =
+: Option(t0opr) =
 (
 case+
 d1e0.node() of
@@ -508,9 +518,10 @@ T_STRING_closed(rep) => T0Mstr(xatsopt_strunq(rep))
 fun
 auxlist
 ( d1e0
-: d1exp): t0erm =
+: d1exp)
+: t0erm =
 (
-  auxd1es(d1es)
+T0Mtup(auxd1es(d1es))
 ) where
 {
 //
@@ -520,21 +531,19 @@ D1Elist
 //
 fun
 auxd1es
-(d1es: d1explst): t0erm =
+(d1es: d1explst): t0ermlst =
 (
 case+ d1es of
 | list_nil() =>
   (
-    T0Mnil()
+    mylist_nil()
   )
 | list_cons
   (d1e1, d1es) =>
   let
   val t0m1 = d1exp2t0erm(d1e1)
   in
-    if
-    iseqz(d1es)
-    then t0m1 else T0Mtup(t0m1, auxd1es(d1es))
+    mylist_cons(t0m1, auxd1es(d1es))
   end // end of [list_cons]
 )
 //
@@ -568,7 +577,7 @@ D1Eif0
 //
 in
 (
-T0Mift(t0m1, t0m2, opt3)
+T0Mcond(t0m1, t0m2, opt3)
 ) where
 {
   val
@@ -593,7 +602,7 @@ D1Elet
 //
 in
 (
-  T0Mlets(t1ds, t0m2)
+  T0Mlet(t1ds, t0m2)
 ) where
 {
 val
@@ -615,20 +624,27 @@ D1Elam
 , res0
 , arrw
 , body) = d1e0.node()
-val farg = f1as2x0nam(f1as)
-val topt = f1as2type0(f1as)
+val farg = f1as2t0var(f1as)
+val targ = f1as2type0(f1as)
 val body = d1exp2t0erm(body)
 in
 case+ res0 of
 | EFFS1EXPnone() =>
-  T0Mlam(farg, topt, body)
-| EFFS1EXPsome(s1e0) =>
   (
-  T0Mlam(farg, topt, body)
+  T0Mlam
+  (farg, targ, body, tres)
   ) where
   {
-    val tres = s1exp2type0(s1e0)
-    val body = T0Manno(body, tres)
+    val tres = myoptn_nil()
+  }
+| EFFS1EXPsome(s1e0) =>
+  (
+  T0Mlam
+  (farg, targ, body, tres)
+  ) where
+  {
+    val tres =
+    myoptn_cons(s1exp2type0(s1e0))
   }
 end // end of [auxlam]
 
@@ -651,29 +667,32 @@ case-
 fid0.node() of
 | T_IDENT_alp(nam) => nam
 | T_IDENT_sym(nam) => nam
-) : f0nam // end-of-val
+) : t0var // end-of-val
 //
-val farg = f1as2x0nam(f1as)
-val topt = f1as2type0(f1as)
+val farg = f1as2t0var(f1as)
+val targ = f1as2type0(f1as)
 val body = d1exp2t0erm(body)
 //
 in
 case+ res0 of
 | EFFS1EXPnone() =>
   (
-  T0Mfix1
+  T0Mfix
   ( idf
-  , farg
-  , topt, tres, body)
+  , T0Mlam
+    ( farg, targ
+    , body, tres))
   ) where
   {
     val tres = myoptn_nil()
   }
 | EFFS1EXPsome(s1e0) =>
   (
-  T0Mfix1
+  T0Mfix
   ( idf
-  , farg, topt, tres, body)
+  , T0Mlam
+    ( farg, targ
+    , body, tres))
   ) where
   {
     val tres =
@@ -751,9 +770,15 @@ case+ opt1 of
 |
 None() =>
 let
-val t0m1 = d1exp2t0erm(d1e1)
+val t0m1 =
+d1exp2t0erm(d1e1)
+val t0ms =
+mylist_cons
+( t0m2
+, mylist_cons
+  (t0m3, mylist_nil()))
 in
-  T0Mapp(t0m1, T0Mtup(t0m2, t0m3))
+  T0Mapp(t0m1, T0Mtup(t0ms))
 end
 |
 Some(opr1) =>
@@ -912,7 +937,7 @@ tok.node() of
 | T_IDENT_alp(nam) => nam
 | T_IDENT_sym(nam) => nam
 )
-end : x0nam // end of [val]
+end : t0var // end of [val]
 //
 val def =
 (
@@ -975,10 +1000,10 @@ case-
 nam.node() of
 | T_IDENT_alp(nam) => nam
 | T_IDENT_sym(nam) => nam
-) : x0nam // end of [val]
+) : t0var // end of [val]
 //
-val farg = f1as2x0nam(rcd.arg)
-val topt = f1as2type0(rcd.arg)
+val farg = f1as2t0var(rcd.arg)
+val targ = f1as2type0(rcd.arg)
 //
 val body =
 (
@@ -997,18 +1022,22 @@ val fdef =
 case+ rcd.res of
 | EFFS1EXPnone() =>
   (
-  T0Mfix1
+  T0Mfix
   ( idf
-  , farg, topt, tres, body)
+  , T0Mlam
+    ( farg, targ
+    , body, tres) )
   ) where
   {
     val tres = myoptn_nil()
   }
 | EFFS1EXPsome(s1e0) =>
   (
-  T0Mfix1
+  T0Mfix
   ( idf
-  , farg, topt, tres, body)
+  , T0Mlam
+    ( farg, targ
+    , body, tres))
   ) where
   {
     val tres =
@@ -1137,6 +1166,13 @@ else prerrln! ("Hello from CS525(project)!")
 //
 (* ****** ****** *)
 
+implement
+fprint_val<t0dcl> = fprint_t0dcl
+implement
+fprint_val<t0erm> = fprint_t0erm
+
+(* ****** ****** *)
+
 local
 //
 static
@@ -1214,13 +1250,14 @@ println!
 val-
 myoptn_cons(t0m0) = mopt
 val
-prgm0 = P0GRM(t0ds, t0m0)
+prgm0 = T0PGM(t0ds, t0m0)
+(*
 val
-prgm1 = trans01_pgrm(prgm0)
-//
+prgm1 = trans01_tpgm(prgm0)
 val () =
 println!
 ("process_fpath: prgm1 = ", prgm1)
+*)
 //
 } (* end of [then] *)
 else

@@ -2,298 +2,360 @@
 ** For your
 ** final project
 *)
-
 (* ****** ****** *)
-
 #staload
 "./../mylib/mylib.sats"
-
+(* ****** ****** *)
+//
+// LEVEL-0 SYNTAX
+//
 (* ****** ****** *)
 typedef tpnam = string
 (* ****** ****** *)
-typedef opnam = string
-(* ****** ****** *)
-typedef f0nam = string
-typedef x0nam = string
-(* ****** ****** *)
-
-abstype tpext_type = ptr
-typedef tpext = tpext_type
-
-(* ****** ****** *)
 //
-datatype
-type0 =
+datatype type0 =
+|
+T0Pbas of tpnam
+|
+T0Pfun of
+(type0(*arg*), type0(*res*))
+|
+T0Ptup of
+(type0(*fst*), type0(*snd*))
 //
-  | T0Pbas of tpnam // base
-//
-  | T0Pext of tpext // unify
-//
-  | T0Ptup of // tuples
-    (type0(*fst*), type0(*snd*))
-//
-  | T0Pfun of // functions
-    (type0(*arg*), type0(*res*))
-//
-typedef type0opt = myoptn(type0)
-typedef type0lst = mylist(type0)
+where type0lst = mylist(type0)
+  and type0opt = myoptn(type0)
 //
 (* ****** ****** *)
 //
-datatype
-ctype0 = CT0P of (type0lst, type0)
+val T0Pnil: type0 // nil
+//
+val T0Pint: type0 // int
+//
+val T0Pbool: type0 // bool
+//
+val T0Pstring: type0 // string
 //
 (* ****** ****** *)
-//
 fun
-print_type0: print_type(type0)
-fun
-fprint_type0: fprint_type(type0)
-//
+print_type0
+(xs: type0): void
 overload print with print_type0
+fun
+fprint_type0
+(out: FILEref, xs: type0): void
 overload fprint with fprint_type0
+(* ****** ****** *)
 //
-fun
-print_ctype0: print_type(ctype0)
-fun
-fprint_ctype0: fprint_type(ctype0)
+// creating an alias
 //
-overload print with print_ctype0
-overload fprint with fprint_ctype0
+typedef t0opr = string
+typedef t0var = string
 //
 (* ****** ****** *)
-
+//
+// abstract syntax
+//
 datatype
-t0dcl =
+t0pgm =
+|
+T0PGM of
+( t0dclist
+, t0erm(*main*))
+//
+and t0dcl =
 | T0DCL of
-  (x0nam, t0erm)
+  (t0var, t0erm)
 //
 and t0erm =
 //
-  | T0Mnil of ()
+| T0Mnil of ()
 //
-  | T0Mint of int
-  | T0Mbtf of bool
-(*
-  | T0Mflt of double
-*)
-  | T0Mstr of string
+| T0Mbtf of bool
+| T0Mint of (int)
+| T0Mflt of double
+| T0Mstr of string
 //
-  | T0Mvar of x0nam
-  | T0Mlam of
-    (x0nam, type0opt, t0erm)
-  | T0Mapp of (t0erm, t0erm)
+| T0Mvar of (t0var)
 //
-  | T0Mift of (t0erm, t0erm, t0ermopt)
+| T0Mlam of
+  ( t0var
+  , type0opt(*arg*)
+  , t0erm
+  , type0opt(*res*))
+| T0Mfix of
+  ( t0var
+  , t0erm(*T0Mlam*))
 //
-  | T0Mtup of (t0erm, t0erm)
-  | T0Mfst of t0erm | T0Msnd of t0erm
+| T0Mapp of (t0erm, t0erm)
 //
-  | T0Moprs of (opnam, t0ermlst)
+| T0Mlet of
+  ( t0dclist, t0erm )
 //
-  | T0Manno of (t0erm, type0) // type-annotation
+| T0Mopr1 of
+  (t0opr, t0erm)
+| T0Mopr2 of
+  (t0opr, t0erm, t0erm)
+| T0Moprs of
+  (t0opr, t0ermlst)
 //
-  | T0Mlets of
-    (t0dclist(*local*), t0erm(*scope*)) // local bindings
+| T0Mtup of (t0ermlst)
+| T0Mprj of (t0erm, int(*index*))
 //
-  | T0Mfix1 of
-    ( f0nam(*f*)
-    , x0nam(*x*)
-    , type0opt(*arg*)
-    , type0opt(*res*), t0erm) // Y(lam f.lam x.<body>)
+| T0Manno of (t0erm, type0)
 //
-where
-t0dclist = mylist(t0dcl)
-and
-t0ermlst = mylist(t0erm)
-and
-t0ermopt = myoptn(t0erm)
-
+| T0Mcond of
+  ( t0erm(*test*)
+  , t0erm(*then*), t0ermopt(*else*))
+//
+where t0dclist = mylist(t0dcl)
+  and t0ermlst = mylist(t0erm)
+  and t0ermopt = myoptn(t0erm)
+//
 (* ****** ****** *)
-
-datatype p0grm =
-| P0GRM of (t0dclist, t0erm)
-
+fun
+print_t0pgm
+(xs: t0pgm): void
+overload print with print_t0pgm
+fun
+fprint_t0pgm
+(out: FILEref, xs: t0pgm): void
+overload fprint with fprint_t0pgm
 (* ****** ****** *)
-//
 fun
-print_t0erm: print_type(t0erm)
-fun
-fprint_t0erm: fprint_type(t0erm)
-//
-overload print with print_t0erm
-overload fprint with fprint_t0erm
-//
-fun
-print_t0dcl: print_type(t0dcl)
-fun
-fprint_t0dcl: fprint_type(t0dcl)
-//
+print_t0dcl
+(xs: t0dcl): void
 overload print with print_t0dcl
+fun
+fprint_t0dcl
+(out: FILEref, xs: t0dcl): void
 overload fprint with fprint_t0dcl
-//
+(* ****** ****** *)
 fun
-print_p0grm: print_type(p0grm)
+print_t0erm
+(xs: t0erm): void
+overload print with print_t0erm
 fun
-fprint_p0grm: fprint_type(p0grm)
-//
-overload print with print_p0grm
-overload fprint with fprint_p0grm
-//
+fprint_t0erm
+(out: FILEref, xs: t0erm): void
+overload fprint with fprint_t0erm
 (* ****** ****** *)
 //
-// Resolving binding/scoping issues
+// LEVEL-1 SYNTAX
+// for resolving bindings
+//
+(* ****** ****** *)
+abstype
+tpext_type = ptr
+typedef
+tpext = tpext_type
+(* ****** ****** *)
+
+fun
+print_tpext:
+tpext -> void
+fun
+fprint_tpext:
+(FILEref, tpext) -> void
+
+(* ****** ****** *)
+//
+datatype type1 =
+|
+T1Pbas of tpnam
+|
+T1Pfun of
+(type1(*arg*), type1(*res*))
+|
+T1Ptup of
+(type1(*fst*), type1(*snd*))
+//
+|
+T1Pext of tpext(*existential*)
+//
+where type1lst = mylist(type1)
+  and type1opt = myoptn(type1)
 //
 (* ****** ****** *)
 
-abstype f1nam_type = ptr
-typedef f1nam = f1nam_type
-abstype x1nam_type = ptr
-typedef x1nam = x1nam_type
+fun tpext_new(): tpext
+fun type1_new_ext(): type1
+fun type1_new_tup(): type1
 
+(* ****** ****** *)
+fun
+print_type1
+(xs: type1): void
+overload print with print_type1
+fun
+fprint_type1
+(out: FILEref, xs: type1): void
+overload fprint with fprint_type1
+(* ****** ****** *)
+//
+typedef
+t1opt = myoptn(type1)
+//
+fun
+tpext_get:
+tpext -> t1opt
+fun
+tpext_set
+(tpext, def: type1): void
+//
+overload .get with tpext_get
+overload .set with tpext_set
+//
+(* ****** ****** *)
+
+abstflt
+stamp_type = int
+typedef
+stamp = stamp_type
+abstbox
+stamper_type = ptr
+typedef
+stamper = stamper_type
+
+(* ****** ****** *)
+fun
+stamper_make(): stamper
+fun
+stamper_stamp(stamper): stamp
+(* ****** ****** *)
+//
+fun
+print_stamp(stamp): void
+fun
+fprint_stamp(FILEref, stamp): void
+//
+overload print with print_stamp
+overload fprint with fprint_stamp
+//
+(* ****** ****** *)
+
+abstype
+t1var_type = ptr // 1 word
+typedef
+t1var = t1var_type // alias
+
+(* ****** ****** *)
+
+fun
+t1var_new(name: t0var): t1var
+(* ****** ****** *)
+
+fun
+t1var_get_type1
+(t1v0: t1var): type1
+overload .type1 with t1var_get_type1
+
+(* ****** ****** *)
+//
+fun
+print_t1var(t1var): void
+fun
+fprint_t1var(FILEref, t1var): void
+//
+overload print with print_t1var
+overload fprint with fprint_t1var
+//
 (* ****** ****** *)
 
 datatype
 t1dcl =
-  | T1DCL of (x1nam, t1erm)
+| T1DCL of
+  (t1var, t1erm)
+
 and t1erm =
+| T1Mnil of ()
 //
-  | T1Mint of int
-  | T1Mbool of bool
-(*
-  | T1Mfloat of double
-*)
-  | T1Mstring of string
+| T1Mint of (int)
+| T1Mstr of string
 //
-  | T1Mvar of x1nam
-  | T1Mlam of
-    (x1nam, type0opt, t1erm)
-  | T1Mapp of (t1erm, t1erm)
+| T1Mvar of (t1var)
 //
-  | T1Mift of (t1erm, t1erm, t1ermopt)
+| T1Mlam of
+  ( t1var
+  , type1, t1erm)
+| T1Mfix of
+  ( t1var
+  , type1, t1erm)
 //
-  | T1Mopr of (opnam, t1ermlst)
+| T1Mapp of (t1erm, t1erm)
 //
-  | T1Mtup of (t1erm, t1erm)
-  | T1Mfst of t1erm | T1Msnd of t1erm
+| T1Mlet of
+  ( t1dclist, t1erm )
 //
-  | T1Mann of (t1erm, type0) // type-annotation
+| T1Mopr1 of
+  (t0opr, t1erm)
+| T1Mopr2 of
+  (t0opr, t1erm, t1erm)
 //
-  | T1Mlet of
-    (t1dclist(*local*), t1erm(*scope*)) // local bindings
+| T1Mfst of (t1erm)
+| T1Msnd of (t1erm)
+| T1Mtup of (t1erm, t1erm)
 //
-  | T1Mfix of
-    ( f1nam(*f*)
-    , x1nam(*x*)
-    , type0opt(*arg*)
-    , type0opt(*res*), t1erm) // Y(lam f.lam x.<body>)
+| T1Manno of (t1erm, type1)
 //
-where
-t1dclist = mylist(t1dcl)
-and
-t1ermlst = mylist(t1erm)
-and
-t1ermopt = myoptn(t1erm)
+| T1Mcond of
+  ( t1erm(*test*)
+  , t1erm(*then*), t1erm(*else*))
+//
+where t1dclist = mylist(t1dcl)
+  and t1ermlst = mylist(t1erm)
+  and t1ermopt = myoptn(t1erm)
 
 (* ****** ****** *)
-datatype p1grm =
-| P1GRM of (t1dclist, t1erm)
-(* ****** ****** *)
 //
 fun
-print_t1erm: print_type(t1erm)
+print_t1erm(t1erm): void
 fun
-fprint_t1erm: fprint_type(t1erm)
+fprint_t1erm(FILEref, t1erm): void
 //
 overload print with print_t1erm
 overload fprint with fprint_t1erm
 //
-fun
-print_t1dcl: print_type(t1dcl)
-fun
-fprint_t1dcl: fprint_type(t1dcl)
-//
-overload print with print_t1dcl
-overload fprint with fprint_t1dcl
-//
-fun
-print_p1grm: print_type(p1grm)
-fun
-fprint_p1grm: fprint_type(p1grm)
-//
-overload print with print_p1grm
-overload fprint with fprint_p1grm
-//
 (* ****** ****** *)
 
-fun trans01_decl : t0dcl -> t1dcl
-fun trans01_term : t0erm -> t1erm
-fun trans01_pgrm : p0grm -> p1grm
-
-(* ****** ****** *)
-
-abstype t2erm_type = ptr
-typedef t2erm = t2erm_type
-
-(*
-absimpl
-t2erm_type =
-$rec{
-  t2erm_type= type
-, t2erm_node= t2erm_node
-}
-*)
+fun
+type1_unify
+(type1, type1): bool
+fun
+t1erm_tinfer(t1erm): type1
 
 (* ****** ****** *)
 
 datatype
-t2dcl =
-  | T2DCL of (x1nam, t2erm)
-and t2erm_node =
+value =
 //
-  | T2Mint of int
-  | T2Mbool of bool
-(*
-  | T2Mfloat of double
-*)
-  | T2Mstring of string
+| VALnil of ()
 //
-  | T2Mvar of x1nam
-  | T2Mlam of
-    (x1nam, type0opt, t2erm)
-  | T2Mapp of (t2erm, t2erm)
+| VALint of (int)
+| VALbtf of (bool)
+| VALstr of string
 //
-  | T2Mift of (t2erm, t2erm, t2ermopt)
+| VALtup of (value, value)
+| VALlam of (t1erm, d1env)
+| VALfix of (t1var, value(*lam*))
 //
-  | T2Mopr1 of (opnam, t2erm)
-  | T2Mopr2 of (opnam, t2erm, t2erm)
-//
-  | T2Mtup of (t2erm, t2erm)
-  | T2Mfst of t2erm | T2Msnd of t2erm
-//
-  | T2Mann of (t2erm, type0) // type-annotation
-//
-  | T2Mlet of
-    (t2dclist(*local*), t2erm(*scope*)) // local bindings
-//
-  | T2Mfix of
-    ( f1nam(*f*)
-    , x1nam(*x*)
-    , type0opt(*arg*)
-    , type0opt(*res*), t2erm) // Y(lam f.lam x.<body>)
-//
-  | T2Mcast of (t2erm, type0) // for internalization of type-errors
-//
-where
-t2dclist = mylist(t2dcl)
 and
-t2ermlst = mylist(t2erm)
-and
-t2ermopt = myoptn(t2erm)
+d1env =
+| D1ENV of
+  mylist(@(t1var, value))
+
+where valuelst = mylist(value)
 
 (* ****** ****** *)
-datatype p2grm =
-| P2GRM of (t2dclist, t2erm)
+//
+fun
+print_value(value): void
+fun
+fprint_value(FILEref, value): void
+//
+overload print with print_value
+overload fprint with fprint_value
+//
 (* ****** ****** *)
 //
 fun

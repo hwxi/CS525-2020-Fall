@@ -63,7 +63,9 @@ and t0erm =
 //
 | T0Mnil of ()
 //
+| T0Mbtf of bool
 | T0Mint of (int)
+| T0Mflt of double
 | T0Mstr of string
 //
 | T0Mvar of (t0var)
@@ -84,6 +86,8 @@ and t0erm =
   (t0opr, t0erm)
 | T0Mopr2 of
   (t0opr, t0erm, t0erm)
+| T0Moprs of
+  (t0opr, t0ermlst)
 //
 | T0Mtup of (t0ermlst)
 | T0Mprj of (t0erm, int(*index*))
@@ -107,36 +111,6 @@ fun
 fprint_t0erm
 (out: FILEref, xs: t0erm): void
 overload fprint with fprint_t0erm
-(* ****** ****** *)
-(*
-datatype
-s0env =
-S0ENV of
-mylist(@(t0var, type0))
-*)
-(* ****** ****** *)
-(*
-fun
-s0env_extend
-(s0env, t0var, type0): s0env
-fun
-s0env_search
-(s0env, t0var): myoptn(type0)
-*)
-(* ****** ****** *)
-(*
-//
-// If [prog] is ill-typed,
-// then TypeErrExn is raised
-//
-fun
-t0erm_tcheck0
-(prog: t0erm): type0
-fun
-t0erm_tcheck1
-(t0m0: t0erm, senv: s0env): type0
-//
-*)
 (* ****** ****** *)
 //
 // LEVEL-1 SYNTAX
