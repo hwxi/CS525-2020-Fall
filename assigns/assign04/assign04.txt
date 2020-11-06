@@ -1,8 +1,38 @@
 ############ beg of [README] ############
 
-Total: 50 points
-Due Time: Thursday, the 5th of November
+Due Time: Thursday, the 12th of November
   
+##########################################
+
+Please implement the following items:
+
+1. (50 points)
+fun trans01_tpgm: t0pgm -> t1pgm
+The function [trans01_tpgm] for translating
+a program in level-0 syntax (of the type t0pgm)
+into a corresponding program in level-1 syntax.
+Please see project.sats for the defintions of
+t0pgm and t1pgm.
+
+2. (50 points)
+fun t1pgm_tinfer: t1pgm -> void
+The function t1erm_tinfer computes a type for a
+given program (of the type t1pgm)
+
+3. (50 points)
+fun t1pgm_interp: t1pgm -> value
+
+##########################################
+
+4. (10 points)
+Please read PGround/fact_dats.c and then
+similar construct a function that computes
+Fibonacci numbers:
+
+fun
+fibo(n) =
+if n >= 2 then fibo(n-1)+fibo(n-2) else n
+
 ##########################################
 
 ############# end of [README] #############
