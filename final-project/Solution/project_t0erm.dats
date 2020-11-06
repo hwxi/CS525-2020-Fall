@@ -1,9 +1,20 @@
 (* ****** ****** *)
+#staload
+"./../../mylib/mylib.sats"
+(* ****** ****** *)
+#staload _ =
+"./../../mylib/mylib.dats"
+(* ****** ****** *)
 #staload "./project.sats"
 (* ****** ****** *)
 #staload "./../../mylib/mylib.sats"
 (* ****** ****** *)
 #include "share/atspre_staload.hats"
+(* ****** ****** *)
+
+implement
+fprint_val<t0erm> = fprint_t0erm
+
 (* ****** ****** *)
 
 implement
@@ -17,11 +28,13 @@ fprint_t0dcl(stdout_ref, tm)
 
 implement
 fprint_t0erm
-(out, tm) =
+(out, tm0) =
 (
-case- tm of
+case- tm0 of
 | T0Mvar(x0) =>
   fprint!(out, "T0Mvar(", x0, ")")
+| T0Mtup(tms) =>
+  fprint!(out, "T0Mtms(", tms, ")")
 )
 
 (* ****** ****** *)

@@ -65,7 +65,8 @@ T0PGM of
 //
 and t0dcl =
 | T0DCL of
-  (t0var, t0erm)
+  ( t0var(*name*)
+  , t0erm(*defn*))
 //
 and t0erm =
 //
