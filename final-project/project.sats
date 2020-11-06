@@ -264,7 +264,13 @@ overload fprint with fprint_t1var
 (* ****** ****** *)
 
 datatype
-t1dcl =
+t1pgm =
+|
+T1PGM of
+( t1dclist
+, t1erm(*main*))
+
+and t1dcl =
 | T1DCL of
   (t1var, t1erm)
 
@@ -318,12 +324,27 @@ overload print with print_t1erm
 overload fprint with fprint_t1erm
 //
 (* ****** ****** *)
+//
+fun
+trans01_type: type0 -> type1
+fun
+trans01_term: t0erm -> t1erm
+fun
+trans01_tdcl: t0dcl -> t1dcl
+fun
+trans01_tpgm: t0pgm -> t1pgm
+//
+(* ****** ****** *)
 
 fun
 type1_unify
-(type1, type1): bool
-fun
-t1erm_tinfer(t1erm): type1
+(tp1: type1, tp2: type1): bool
+
+(* ****** ****** *)
+
+fun t1erm_tinfer(t1pgm): void
+fun t1erm_tinfer(t1dcl): void
+fun t1erm_tinfer(t1erm): void
 
 (* ****** ****** *)
 
@@ -357,6 +378,11 @@ fprint_value(FILEref, value): void
 overload print with print_value
 overload fprint with fprint_value
 //
+(* ****** ****** *)
+
+fun
+t1pgm_interp(t1pgm): value
+
 (* ****** ****** *)
 //
 fun
