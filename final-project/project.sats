@@ -277,6 +277,7 @@ and t1dcl =
 and t1erm =
 | T1Mnil of ()
 //
+| T1Mbtf of bool
 | T1Mint of (int)
 | T1Mstr of string
 //
