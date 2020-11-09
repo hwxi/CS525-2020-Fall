@@ -1,0 +1,7 @@
+fun
+main() =
+(
+fix
+f(x:int): int =>
+if x >= 2 then f(x-1)+f(x-2) else x
+) ( 10 )

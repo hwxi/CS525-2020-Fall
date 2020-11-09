@@ -426,8 +426,7 @@ s1e0.node() of
 //
 | S1Eid0 _ => auxid0(s1e0)
 //
-| S1Elist
-   (s1es) => auxlist(s1e0)
+| S1Elist _ => auxlist(s1e0)
 //
 | S1Eapp2 _ => auxapp2(s1e0)
 //

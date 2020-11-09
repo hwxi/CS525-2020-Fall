@@ -252,27 +252,27 @@ in (*in-of-local*)
 implement
 s1exp2type0
   (s1e0) =
-let
+(
+case-
+s1e0.node() of
 //
+|
+S1Eid0 _ => auxid0(s1e0)
+//
+|
+S1Elist _ => auxlist(s1e0)
+//
+|
+S1Eapp2 _ => auxapp2(s1e0)
+//
+) where
+{
 (*
 val () =
 println!
 ("s1exp2type0: s1e0 = ", s1e0)
 *)
-//
-in
-//
-case-
-s1e0.node() of
-//
-| S1Eid0 _ => auxid0(s1e0)
-//
-| S1Elist
-   (s1es) => auxlist(s1e0)
-//
-| S1Eapp2 _ => auxapp2(s1e0)
-//
-end // end of [s1exp2type0]
+} (* s1exp2type0 *)
 
 end // end of [local]
 
@@ -710,6 +710,39 @@ D1Eapp1
 ( d1e1
 , d1e2) = d1e0.node()
 //
+in
+case+
+d1e1.node() of
+|
+D1Edtsel
+(lab, _) => let
+//
+val nsel =
+let
+val opt =
+$LAB.label_get_int(lab)
+in
+case+ opt of
+| ~None_vt() => 0
+| ~Some_vt(n) => n
+end : int // end-of-val
+in
+T0Mprj(d1exp2t0erm(d1e2), nsel)
+end
+|
+_ (*else*) => auxapp1_else(d1e0)
+end
+
+and
+auxapp1_else
+(d1e0: d1exp): t0erm =
+let
+//
+val-
+D1Eapp1
+( d1e1
+, d1e2) = d1e0.node()
+//
 val opt1 = auxopr(d1e1)
 //
 in
@@ -847,6 +880,17 @@ d1e0.node() of
 | D1Eapp2 _ => auxapp2(d1e0)
 //
 | D1Eanno _ => auxanno(d1e0)
+//
+| _(* rest-of-d1exp *) =>
+  let
+  val () =
+  assertloc(false) in exit(1)
+  end where
+  {
+    val () =
+    println!
+    ("d1exp2t0erm: d1e0 = ", d1e0)
+  }
 //
 end // end of [d1exp2t0erm]
 
@@ -1159,8 +1203,11 @@ main0(argc, argv) =
 //
 if
 (argc >= 2)
-then () // project_main0(argc, argv)
-else prerrln! ("Hello from CS525(project)!")
+then
+project_main0(argc, argv)
+else
+prerrln!
+("Hello from CS525(project)!")
 // end of [if]
 ) (* end of [main] *)
 //
@@ -1228,35 +1275,43 @@ synread_program(d0cs)
 //
 val
 d1cs = trans01_declist(d0cs)
-(*
+// (*
 val () =
 println!
 ("process_fpath: d1cs = ", d1cs)
-*)
+// *)
 val () =
 tread01_program(d1cs)
 //
 val
-t0ds = d1ecl2t0dcl_lst(d1cs)
+dcls = d1ecl2t0dcl_lst(d1cs)
 val
 mopt = d1ecl2t0erm_main(d1cs)
+//
+// (*
 val () =
 println!
-("process_fpath: t0ds = ", t0ds)
+("process_fpath: dcls = ", dcls)
 val () =
 println!
 ("process_fpath: mopt = ", mopt)
+// *)
 //
 val-
 myoptn_cons(t0m0) = mopt
 val
-prgm0 = T0PGM(t0ds, t0m0)
-//
-val
-prgm1 = trans01_tpgm(prgm0)
+p0gm = T0PGM(dcls, t0m0)
 val () =
 println!
-("process_fpath: prgm1 = ", prgm1)
+("process_fpath: p0gm = ", p0gm)
+//
+(*
+val
+p1gm = trans01_tpgm(p0gm)
+val () =
+println!
+("process_fpath: p1gm = ", p1gm)
+*)
 //
 } (* end of [then] *)
 else
@@ -1278,11 +1333,11 @@ in
 fpath_make(given, fname)
 end
 //
-(*
+// (*
 val () =
 println!
 ("process_given: arg0 = ", arg0)
-*)
+// *)
 //
 in
   process_fpath(fp0)
@@ -1297,11 +1352,10 @@ let
 //
 val
 XATSHOME =
-"./../xanadu-2020-10-18"
+"./../../xanadu-2020-10-18"
 //
 val
-((*void*)) =
-the_fixity_load(XATSHOME)
+((*void*)) = the_fixity_load(XATSHOME)
 //
 in
 if
