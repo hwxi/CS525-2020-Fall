@@ -1251,13 +1251,12 @@ val-
 myoptn_cons(t0m0) = mopt
 val
 prgm0 = T0PGM(t0ds, t0m0)
-(*
+//
 val
 prgm1 = trans01_tpgm(prgm0)
 val () =
 println!
 ("process_fpath: prgm1 = ", prgm1)
-*)
 //
 } (* end of [then] *)
 else

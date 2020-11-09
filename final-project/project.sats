@@ -327,6 +327,26 @@ overload fprint with fprint_t1erm
 (* ****** ****** *)
 //
 fun
+print_t1dcl(t1dcl): void
+fun
+fprint_t1dcl(FILEref, t1dcl): void
+//
+overload print with print_t1dcl
+overload fprint with fprint_t1dcl
+//
+(* ****** ****** *)
+//
+fun
+print_t1pgm(t1pgm): void
+fun
+fprint_t1pgm(FILEref, t1pgm): void
+//
+overload print with print_t1pgm
+overload fprint with fprint_t1pgm
+//
+(* ****** ****** *)
+//
+fun
 trans01_type: type0 -> type1
 fun
 trans01_term: t0erm -> t1erm
