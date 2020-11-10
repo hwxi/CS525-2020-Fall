@@ -49,6 +49,9 @@ struct
 typedef
 struct
 { int tag; char *data; } lamval_str_;
+typedef
+struct
+{ int tag; void *fenv; } lamval_clo_;
 
 typedef lamval_int_ *lamval_int;
 typedef lamval_str_ *lamval_str;

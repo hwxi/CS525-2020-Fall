@@ -263,6 +263,13 @@ overload fprint with fprint_t1var
 //
 (* ****** ****** *)
 
+abstype
+t1erm_tbox = ptr
+typedef
+t1erm = t1erm_tbox
+
+(* ****** ****** *)
+
 datatype
 t1pgm =
 |
@@ -274,7 +281,8 @@ and t1dcl =
 | T1DCL of
   (t1var, t1erm)
 
-and t1erm =
+and
+t1erm_node =
 | T1Mnil of ()
 //
 | T1Mbtf of bool
@@ -314,6 +322,20 @@ where t1dclist = mylist(t1dcl)
   and t1ermlst = mylist(t1erm)
   and t1ermopt = myoptn(t1erm)
 
+(* ****** ****** *)
+//
+fun
+t1erm_get_node
+  (t1erm): t1erm_node
+fun
+t1erm_get_type
+  (t1m0: t1erm): type1
+//
+#symload
+.node with t1erm_get_node
+#symload
+.type with t1erm_get_type
+//
 (* ****** ****** *)
 //
 fun

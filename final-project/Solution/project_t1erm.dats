@@ -26,7 +26,8 @@ implement
 fprint_t1erm
 (out, t1m) =
 (
-case- t1m of
+case-
+t1m.node() of
 | T1Mvar(t1v) =>
   fprint!(out, "T1Mvar(", t1v, ")")
 )
@@ -65,6 +66,23 @@ T1PGM(dcls, t1m1) =>
 fprint!
 (out, "T1PGM(", dcls, "; ", t1m1, ")")
 )
+
+(* ****** ****** *)
+
+absimpl
+t1erm_tbox = $rec
+{
+  t1erm_node=
+  t1erm_node
+, t1erm_type= type1
+}
+
+(* ****** ****** *)
+
+implement
+t1erm_get_node(t1m) = t1m.t1erm_node
+implement
+t1erm_get_type(t1m) = t1m.t1erm_type
 
 (* ****** ****** *)
 
