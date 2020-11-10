@@ -74,6 +74,15 @@ libxatsopt_cleanall: ; \
 
 ######
 
+test::
+test:: ; ./project TEST/fact.lam
+test:: ; ./project TEST/fibo.lam
+test:: ; ./project TEST/test03.lam
+test:: ; ./project TEST/coin_change.lam
+
+
+######
+
 clean:: ; rm -f *~
 clean:: ; rm -f *_?ats.c
 clean:: ; rm -f *_?ats.o
