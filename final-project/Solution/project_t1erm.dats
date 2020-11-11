@@ -69,11 +69,19 @@ fprint!
 
 (* ****** ****** *)
 
+local
+
+(* ****** ****** *)
+
 absimpl
 t1erm_tbox = $rec
 { t1erm_type= type1
 , t1erm_node= t1erm_node
 }
+
+(* ****** ****** *)
+
+in(* in-of-local *)
 
 (* ****** ****** *)
 
@@ -87,49 +95,56 @@ t1erm_get_type
 (* ****** ****** *)
 
 implement
-t1erm_int
-  (i0) =
+t1erm_make2
+(type, node) =
 (
 $rec
-{ t1erm_type= T1Pint
-, t1erm_node= T1Mint(i0)
+{ t1erm_type= type
+, t1erm_node= node
 }
-)
+) (* end of [t1erm_make2] *)
+
+(* ****** ****** *)
+
+end // end of [local]
+
+(* ****** ****** *)
+
+implement
+t1erm_make1
+(node) =
+t1erm_make2
+(type, node) where
+{
+val type = type1_new_ext()
+} (* end of [t1erm_make1] *)
+
+(* ****** ****** *)
+
+implement
+t1erm_int
+  (i0) =
+t1erm_make2
+(T1Pint, T1Mint(i0))
 
 implement
 t1erm_btf
   (b0) =
-(
-$rec
-{ t1erm_type= T1Pbool
-, t1erm_node= T1Mbtf(b0)
-}
-)
+t1erm_make2
+(T1Pbool, T1Mbtf(b0))
 
 implement
 t1erm_str
   (s0) =
-(
-$rec
-{ t1erm_type= T1Pstring
-, t1erm_node= T1Mstr(s0)
-}
-)
+t1erm_make2
+(T1Pstring, T1Mstr(s0))
 
 (* ****** ****** *)
 
 implement
 t1erm_app
 (t1f1, t1a2) =
-let
-val
-tres = type1_new_ext()
-in
-$rec
-{ t1erm_type= tres
-, t1erm_node= T1Mapp(t1f1, t1a2)
-}
-end // end of [t1erm_app]
+t1erm_make1(T1Mapp(t1f1, t1a2))
 
 (* ****** ****** *)
 

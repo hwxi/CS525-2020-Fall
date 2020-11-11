@@ -8,6 +8,17 @@ val T1Pbool: type1
 val T1Pstring: type1
 
 (* ****** ****** *)
+//
+fun
+t1erm_make1
+( node
+: t1erm_node): t1erm
+fun
+t1erm_make2
+( type: type1
+, node: t1erm_node): t1erm
+//
+(* ****** ****** *)
 
 fun
 t1erm_int(i0: int): t1erm
