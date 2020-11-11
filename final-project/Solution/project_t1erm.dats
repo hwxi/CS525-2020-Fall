@@ -71,18 +71,65 @@ fprint!
 
 absimpl
 t1erm_tbox = $rec
-{
-  t1erm_node=
-  t1erm_node
-, t1erm_type= type1
+{ t1erm_type= type1
+, t1erm_node= t1erm_node
 }
 
 (* ****** ****** *)
 
 implement
-t1erm_get_node(t1m) = t1m.t1erm_node
+t1erm_get_node
+  (t1m) = t1m.t1erm_node
 implement
-t1erm_get_type(t1m) = t1m.t1erm_type
+t1erm_get_type
+  (t1m) = t1m.t1erm_type
+
+(* ****** ****** *)
+
+implement
+t1erm_int
+  (i0) =
+(
+$rec
+{ t1erm_type= T1Pint
+, t1erm_node= T1Mint(i0)
+}
+)
+
+implement
+t1erm_btf
+  (b0) =
+(
+$rec
+{ t1erm_type= T1Pbool
+, t1erm_node= T1Mbtf(b0)
+}
+)
+
+implement
+t1erm_str
+  (s0) =
+(
+$rec
+{ t1erm_type= T1Pstring
+, t1erm_node= T1Mstr(s0)
+}
+)
+
+(* ****** ****** *)
+
+implement
+t1erm_app
+(t1f1, t1a2) =
+let
+val
+tres = type1_new_ext()
+in
+$rec
+{ t1erm_type= tres
+, t1erm_node= T1Mapp(t1f1, t1a2)
+}
+end // end of [t1erm_app]
 
 (* ****** ****** *)
 

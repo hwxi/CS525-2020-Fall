@@ -17,6 +17,11 @@ fun
 t1erm_str(s0: string): t1erm
 
 (* ****** ****** *)
+
+fun
+t1erm_app(t1erm, t1erm): t1erm
+
+(* ****** ****** *)
 //
 datatype
   s0env =

@@ -7,6 +7,17 @@
 (* ****** ****** *)
 
 implement
+T1Pnil = T1Pbas("nil")
+implement
+T1Pint = T1Pbas("int")
+implement
+T1Pbool = T1Pbas("bool")
+implement
+T1Pstring = T1Pbas("string")
+
+(* ****** ****** *)
+
+implement
 type1_new_ext() =
 T1Pext(tpext_new())
 

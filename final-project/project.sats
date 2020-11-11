@@ -182,6 +182,7 @@ where type1lst = mylist(type1)
 fun tpext_new(): tpext
 fun type1_new_ext(): type1
 fun type1_new_tup(): type1
+fun type1_new_fun(): type1
 
 (* ****** ****** *)
 fun
