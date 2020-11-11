@@ -1,39 +1,46 @@
 (* ****** ****** *)
-#staload "./lambda2.sats"
+#staload "./project.sats"
+(* ****** ****** *)
+#include
+"share/atspre_staload.hats"
 (* ****** ****** *)
 #staload
-"./../../../mylib/mylib.sats"
-(* ****** ****** *)
-#include "share/atspre_staload.hats"
+"./../../mylib/mylib.sats"
+#staload
+"./../../mylib/mylib.dats"
 (* ****** ****** *)
 
 implement
+s0env_nil() =
+S0ENV(mylist_nil())
+
+implement
 s0env_extend
-(env, x0, tp) =
+(env, x0, tm) =
 let
 val+
 S0ENV(xts) = env
 in
-S0ENV(mylist_cons((x0, tp), xts))
+S0ENV(mylist_cons((x0, tm), xts))
 end // end of [s0env_extend]
 
 (* ****** ****** *)
 
 implement
 s0env_search
-(s0env, x0) =
+(env, x0) =
 (
   auxlst(xts)
 ) where
 {
 val+
-S0ENV(xts) = s0env
+S0ENV(xts) = env
 fun
 auxlst
 ( xts
 : mylist
-  @(t0var, type0)
-) : myoptn(type0) =
+  @(t0var, t1erm)
+) : myoptn(t1erm) =
 (
 case+ xts of
 |
@@ -50,4 +57,4 @@ myoptn_cons(xt1.1) else auxlst(xts)
 
 (* ****** ****** *)
 
-(* end of [lambda2_s0env.dats] *)
+(* end of [project_s0env.dats] *)

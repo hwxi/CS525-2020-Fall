@@ -33,6 +33,10 @@ OBJECTS += \
 project_t1var_dats.o
 OBJECTS += \
 project_t1erm_dats.o
+OBJECTS += \
+project_s0env_dats.o
+OBJECTS += \
+project_trans01_dats.o
 
 ######
 
@@ -61,6 +65,12 @@ project_t1var_dats.o : \
 project.sats project_t1var.dats ; $(PATSCC) -o $@ -c project_t1var.dats
 project_t1erm_dats.o : \
 project.sats project_t1erm.dats ; $(PATSCC) -o $@ -c project_t1erm.dats
+
+project_s0env_dats.o : \
+project.sats project_s0env.dats ; $(PATSCC) -o $@ -c project_s0env.dats
+
+project_trans01_dats.o : \
+project.sats project_trans01.dats ; $(PATSCC) -o $@ -c project_trans01.dats
 
 ######
 

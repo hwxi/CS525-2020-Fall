@@ -30,7 +30,10 @@ UN = "prelude/SATS/unsafe.sats"
 #dynload "./project_type1.dats"
 #dynload "./project_t1var.dats"
 #dynload "./project_t1erm.dats"
-
+//
+#dynload "./project_s0env.dats"
+#dynload "./project_trans01.dats"
+//
 (* ****** ****** *)
 //
 #include "./libxatsopt.hats"
