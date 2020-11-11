@@ -37,6 +37,8 @@ OBJECTS += \
 project_s0env_dats.o
 OBJECTS += \
 project_trans01_dats.o
+OBJECTS += \
+project_tinfer_dats.o
 
 ######
 
@@ -71,6 +73,9 @@ project.sats project_s0env.dats ; $(PATSCC) -o $@ -c project_s0env.dats
 
 project_trans01_dats.o : \
 project.sats project_trans01.dats ; $(PATSCC) -o $@ -c project_trans01.dats
+
+project_tinfer_dats.o : \
+project.sats project_tinfer.dats ; $(PATSCC) -o $@ -c project_tinfer.dats
 
 ######
 

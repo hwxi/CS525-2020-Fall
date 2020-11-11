@@ -33,6 +33,7 @@ UN = "prelude/SATS/unsafe.sats"
 //
 #dynload "./project_s0env.dats"
 #dynload "./project_trans01.dats"
+#dynload "./project_tinfer.dats"
 //
 (* ****** ****** *)
 //
