@@ -369,12 +369,6 @@ overload fprint with fprint_t1pgm
 (* ****** ****** *)
 //
 fun
-trans01_type: type0 -> type1
-fun
-trans01_term: t0erm -> t1erm
-fun
-trans01_tdcl: t0dcl -> t1dcl
-fun
 trans01_tpgm: t0pgm -> t1pgm
 //
 (* ****** ****** *)

@@ -8,6 +8,15 @@ val T1Pbool: type1
 val T1Pstring: type1
 
 (* ****** ****** *)
+
+fun
+t1erm_int(i0: int): t1erm
+fun
+t1erm_btf(b0: bool): t1erm
+fun
+t1erm_str(s0: string): t1erm
+
+(* ****** ****** *)
 //
 datatype
   s0env =
