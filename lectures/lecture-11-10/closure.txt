@@ -1,0 +1,47 @@
+
+fun fact(n) =
+if n > 0 then n * fact(n-1) else 1
+
+fun
+fact2(n) =
+let
+  fun
+  loop(i, r) =
+  if
+  (i < n)
+  then
+  let
+  val i1 = i + 1
+  in
+    loop(i1, i1*r)
+  else r // end-of-if
+in
+  loop(0, 1)
+end
+
+
+  fun
+  loop(i, r, env) =
+  if
+  (i < env.n)
+  then
+  let
+  val i1 = i + 1
+  in
+    loop(i1, i1*r, env)
+  else r // end-of-if
+
+fun
+fact2(n) =
+let
+in
+  loop(0, 1, env) where { val env = $rec{n=n} }
+end
+
+
+
+qsort:
+compar: (ptr, ptr) -> int
+
+qsort_r
+compar: (ptr, ptr, env) -> int
