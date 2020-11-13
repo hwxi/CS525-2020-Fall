@@ -1,4 +1,5 @@
-#include "./../project.sats"
+#include
+"./../project.sats"
 
 (* ****** ****** *)
 
@@ -26,6 +27,11 @@ fun
 t1erm_btf(b0: bool): t1erm
 fun
 t1erm_str(s0: string): t1erm
+
+(* ****** ****** *)
+
+fun
+t1erm_var(t1v: t1var): t1erm
 
 (* ****** ****** *)
 

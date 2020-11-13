@@ -248,16 +248,17 @@ t1var_new(name: t0var): t1var
 (* ****** ****** *)
 
 fun
-t1var_get_type1
+t1var_get_type
 (t1v0: t1var): type1
-overload .type1 with t1var_get_type1
+overload .type with t1var_get_type
 
 (* ****** ****** *)
 //
 fun
 print_t1var(t1var): void
 fun
-fprint_t1var(FILEref, t1var): void
+fprint_t1var
+(out: FILEref, t1var): void
 //
 overload print with print_t1var
 overload fprint with fprint_t1var

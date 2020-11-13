@@ -39,6 +39,13 @@ t1var_type = $rec
 in(* in-of-local *)
 
 implement
+t1var_get_type
+  (t1v) =
+(
+  t1v.t1var_type
+)
+
+implement
 t1var_new(name) =
 $rec
 {

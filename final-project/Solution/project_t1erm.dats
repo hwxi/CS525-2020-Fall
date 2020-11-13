@@ -142,6 +142,18 @@ t1erm_make2
 (* ****** ****** *)
 
 implement
+t1erm_var
+  (t1v) =
+t1erm_make2
+( t1p
+, T1Mvar(t1v)) where
+{
+  val t1p = t1v.type()
+}
+
+(* ****** ****** *)
+
+implement
 t1erm_app
 (t1f1, t1a2) =
 t1erm_make1(T1Mapp(t1f1, t1a2))

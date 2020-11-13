@@ -1,0 +1,71 @@
+(* ****** ****** *)
+
+val
+theCoins =
+(1, 5, 10, 25)
+
+(* ****** ****** *)
+
+val
+coin_get =
+lam
+(n: int): int =>
+(
+if n = 0 then theCoins.0
+else
+if n = 1 then theCoins.1
+else
+if n = 2 then theCoins.2
+else
+if n = 3 then theCoins.3 else -1(*err*)
+) (* end of [coin_get] *)
+
+(* ****** ****** *)
+
+fun
+main() =
+//
+let
+val
+coin_change =
+lam
+(sum: int): int =>
+let
+  val
+  aux =
+  fix
+  aux
+  (sum: int):
+  int -> int =>
+  lam(n: int): int =>
+  if
+  (sum > 0)
+  then
+  (
+  if n >= 0
+  then
+  ( aux(sum)(n-1)
+  + aux
+    (sum-coin_get(n))(n)) else 0
+  )
+  else (if sum < 0 then 0 else 1)
+  // end of [aux]
+in
+  aux(sum)(3(*ncoin*))
+end
+in
+  let
+  val _ =
+  print
+  ("coin_change(100) = ")
+  in
+  let
+  val _ =
+  print(coin_change(100)) in print("\n")
+  end
+  end
+end // coin_change
+//
+(* ****** ****** *)
+
+(* end of [coin_change.lam] *)
