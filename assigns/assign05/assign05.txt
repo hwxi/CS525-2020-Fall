@@ -1,0 +1,27 @@
+############ beg of [README] ############
+
+Due Time: Tuesday, the 24th of November
+  
+##########################################
+
+20 points.
+
+Please "manually" compile the following
+function while performing tail-recursion
+optimization:
+
+fun
+f91(x: int): int =
+if x > 100 then x - 10 else f91(f91(x+11))
+
+Note that the outer recursive call to f91
+is a tail-call. Please make sure that this
+call is turned into a local jump.
+
+Your submitted file should be given the name
+"f91_dats.c".
+
+##########################################
+
+############# end of [README] #############
+
