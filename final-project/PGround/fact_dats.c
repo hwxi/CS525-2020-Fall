@@ -16,7 +16,8 @@ fact(lamval n)
   lamval tmp1;
   lamval tmp2;
   lamval tmp3;
-  tmp0 = LAMOPR_igt(n, LAMVAL_int(0));
+  tmp0 =
+  LAMOPR_igt(n, LAMVAL_int(0));
   if (((lamval_int)tmp0)->data) {
     tmp1 = LAMOPR_isub(n, LAMVAL_int(1));
     tmp2 = fact(tmp1);

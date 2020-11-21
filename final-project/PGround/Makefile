@@ -6,6 +6,11 @@ fact_dats
 fact_dats: \
 fact_dats.c ; $(CC) -o $@ $<
 
+all:: \
+fact2_dats
+fact2_dats: \
+fact2_dats.c ; $(CC) -o $@ $<
+
 test:: fact_dats ; ./fact_dats
 
 clean:: ; rm -f *~
