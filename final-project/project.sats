@@ -381,8 +381,8 @@ type1_unify
 
 (* ****** ****** *)
 
-fun t1erm_tinfer(t1pgm): void
-fun t1erm_tinfer(t1dcl): void
+fun t1pgm_tinfer(t1pgm): void
+fun t1dcl_tinfer(t1dcl): void
 fun t1erm_tinfer(t1erm): void
 
 (* ****** ****** *)
