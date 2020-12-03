@@ -44,6 +44,10 @@ datatype t2ins =
 T2INSmov of
 (t2tmp, t2val) // t2tmp <- t2val
 |
+T2INSclo of
+( t2tmp
+, t2fnm, t2valist)
+|
 T2INStup of
 (t2tmp, t2val, t2val)
 |
@@ -78,10 +82,16 @@ typedef t2dcl = t2dcl_type
 
 (* ****** ****** *)
 
+datatype
+c2env =
+| C2ENVnil of ()
+| C2ENVmark of (int, c2env)
+| C2ENVcons of (t1var, t1val, c2env)
+
 extern
 fun
 trans12_term
-(t1m0: t1erm): (t2inslst, t2val)
+(env: c2env, t1m0: t1erm): (t2inslst, t2val)
 
 (*
 extern

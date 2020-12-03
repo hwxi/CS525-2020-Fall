@@ -1,0 +1,58 @@
+
+
+
+fun foo(...) = ... x ...
+
+1. 'x' is the arg
+2. 'x' is a local // let-var
+3. 'x' is a fix-var
+4. 'x' is an environmental // arg of an outer function
+5. 'x' is a global
+
+
+views: caller's view and callee's view
+
+
+fun foo(z) =
+...
+T2INSclo(tmp???, f1234, [env[???]])
+...
+
+create a name: f1234
+
+
+lamval
+f1234(lamval arg1, lamval* env) {
+   tmp101 = LAMOPR_iadd(arg1, env[???])
+}
+---------
+
+[]
+[(xyz1, ...)]
+[(xyz2, ...), (xyz1, ...)]
+
+[ (u, tmp101), (z, arg1), (y, tmp7), (x, ), $1$, (xyz2, ...), (xyz1, ...)]
+
+---------
+
+
+...
+(lam x => x + y)(500)
+...
+
+closurecall(tmp100, 500)
+
+
+FP(500, tmp100)
+
+[FP | env1, env2]
+
+T2INSclo0(f1234, [])
+T2INSclo1(f1234, [x])
+T2INSclo2(f1234, [x, y])
+
+calloc(n)
+
+[
+
+

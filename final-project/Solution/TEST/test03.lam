@@ -1,6 +1,7 @@
 (*
 // This one is by Shlomi Hod
 *)
+//
 fun main() =
 (
   let
@@ -21,7 +22,7 @@ fun main() =
       end
   end
 )
-
+//
 (* ****** ****** *)
 
 (* end of [test03.lam] *)
